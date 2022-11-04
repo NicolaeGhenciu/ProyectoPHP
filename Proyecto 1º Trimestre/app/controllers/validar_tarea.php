@@ -1,29 +1,52 @@
 <?php
-if (empty($_POST["nombre"]) || empty($_POST["apellidos"]) || empty($_POST["descripcion"])) {
-    if (empty($_POST["nombre"]))
-        echo "<p style='color:red'>Campo nombre vacio</p>";
-    if (empty($_POST["apellidos"]))
-        echo "<p style='color:red'>Campo apellidos vacio</p>";
-    if (empty($_POST["descripcion"]))
-        echo "<p style='color:red'>Campo descripción vacio</p>";
+
+include "utilsforms.php";
+
+$hayError = FALSE;
+$errores = [];
+$fcha = date("Y-m-d");
+
+if (!$_POST) { // Si no han enviado el fomulario
+    include("../views/formulario_tarea.php");
+} else {
+
+    if (empty($_POST["nombre"])) {
+        $errores['nombre'] = 'Campo nombre se encuentra vacio';
+        $hayError = TRUE;
+    }
+    if (empty($_POST["apellidos"])) {
+        $errores['apellidos'] = 'Campo apellidos se encuentra vacio';
+        $hayError = TRUE;
+    }
+    if (empty($_POST["descripcion"])) {
+        $errores['descripcion'] = 'Campo descripción se encuentra vacio';
+        $hayError = TRUE;
+    }
+    if (empty($_POST["cod_postal"]) || !validarCodigoPostal($_POST["cod_postal"])) {
+        $errores['cod_postal'] = 'Campo Codigo Postal tiene un formato incorrecto o se encuentra vacio';
+        $hayError = TRUE;
+    }
+    if (empty($_POST["nif_cif"]) || !validarDni($_POST["nif_cif"])) {
+        $errores['nif_cif'] = 'Campo NIF o CIF tiene un formato incorrecto o se encuentra vacio';
+        $hayError = TRUE;
+    }
+    if (empty($_POST["telefono"]) || !validarTelefono($_POST["telefono"])) {
+        $errores['telefono'] = 'Campo teléfono tiene un formato incorrecto o se encuentra vacio';
+        $hayError = TRUE;
+    }
+    if (empty($_POST["email"]) || !validarEmail($_POST["email"])) {
+        $errores['email'] = 'Campo email tiene un formato incorrecto o se encuentra vacio';
+        $hayError = TRUE;
+    }
+    if (empty($_POST["fecha_realizacion"]) || !validarFechaRealizacion($_POST["fecha_realizacion"])) {
+        $errores['fecha_realizacion'] = 'Campo fecha de realización se encuentra vacio o no es valido, la fecha tiene que ser posterior a la de hoy';
+        $hayError = TRUE;
+    }
+
+    if ($hayError) {
+        include("../views/formulario_tarea.php");
+    }
 }
-
-if (empty($_POST["cod_postal"]) || !validarCodigoPostal($_POST["cod_postal"]))
-    echo "<p style='color:red'>Campo Codigo Postal incorrecto</p>";
-
-if (empty($_POST["nif_cif"]) || !validarDni($_POST["nif_cif"]))
-    echo "<p style='color:red'>Campo nif, cif vacio o incorrecto</p>";
-
-if (empty($_POST["telefono"]) || !validarTelefono($_POST["telefono"]))
-    echo "<p style='color:red'>Campo telefono vacio o incorrecto</p>";
-
-if (empty($_POST["email"]) || !validarEmail($_POST["email"]))
-    echo "<p style='color:red'>Campo email vacio o incorrecto</p>";
-
-if (empty($_POST["fecha_realizacion"]) || !validarFechaRealizacion($_POST["fecha_realizacion"]))
-    echo "<p style='color:red'>Campo fecha vacio o no es valido, la fecha tiene que ser posterior a la de hoy</p>";
-
-include("../views/formulario_tarea.php");
 
 function validarDni($dni)
 {
@@ -42,6 +65,7 @@ function validarDni($dni)
         }
     }
 }
+
 
 function validarTelefono($tel)
 {

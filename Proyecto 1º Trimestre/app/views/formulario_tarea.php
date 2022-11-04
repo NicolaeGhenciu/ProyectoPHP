@@ -11,24 +11,31 @@
 <body>
     <form action="../controllers/validar_tarea.php" method="post">
         <label>NIF o CIF:</label>
-        <input type="text" name="nif_cif"> <br>
+        <input type="text" name="nif_cif" value="<?= ValorPost('nif_cif') ?>">
+        <?= VerError('nif_cif') ?> <br>
         <label>Persona de contacto :</label> <br>
         <label>Nombre: </label>
-        <input type="text" name="nombre"> <br>
+        <input type="text" name="nombre" value="<?= ValorPost('nombre') ?>">
+        <?= VerError('nombre') ?> <br>
         <label>Apellidos: </label>
-        <input type="text" name="apellidos"> <br>
+        <input type="text" name="apellidos" value="<?= ValorPost('apellidos') ?>">
+        <?= VerError('apellidos') ?> <br>
         <label>Teléfono: </label>
-        <input type="text" name="telefono"> <br>
+        <input type="text" name="telefono" value="<?= ValorPost('telefono') ?>">
+        <?= VerError('telefono') ?> <br>
         <label>Descripción: </label> <br>
-        <textarea name="descripcion" cols="30" rows="3"></textarea> <br>
+        <textarea name="descripcion" cols="30" rows="3"><?= ValorPost('descripcion') ?></textarea>
+        <?= VerError('descripcion') ?> <br>
         <label>Correo electrónico: </label>
-        <input type="text" name="email"> <br>
+        <input type="text" name="email" value="<?= ValorPost('email') ?>">
+        <?= VerError('email') ?> <br>
         <label>Dirección: </label>
         <input type="text" name="direccion"> <br>
         <label>Población: </label>
         <input type="text" name="poblacion"> <br>
         <label>Codigo Postal: </label>
-        <input type="text" name="cod_postal"> <br>
+        <input type="text" name="cod_postal" value="<?= ValorPost('cod_postal') ?>">
+        <?= VerError('cod_postal') ?> <br>
         <label>Provincia: </label>
         <select name="provincia">
             <option hidden selected>Selecciona una provincia</option>
@@ -50,13 +57,14 @@
             <option value="C">C=Cancelada</option>
         </select> <br>
         <label>Fecha de creación de la tarea: </label>
-        <input type="date" name="fecha_creacion"> <br>
+        <input type="date" name="fecha_creacion" readonly value="<?= $fcha ?>"> <br>
         <label>Operario encargado: </label>
         <select name="">
             <option value=""></option>
         </select> <br>
         <label>Fecha de realización: </label>
-        <input type="date" name="fecha_realizacion"> <br>
+        <input type="date" name="fecha_realizacion" value="<?= ValorPost('fecha_realizacion') ?>">
+        <?= VerError('fecha_realizacion') ?> <br>
         <label>Anotaciones anteriores: </label> <br>
         <textarea name="anotaciones_anteriores" cols="30" rows="3"></textarea> <br>
         <label>Anotaciones posteriores: </label> <br>
