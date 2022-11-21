@@ -37,17 +37,16 @@
         <input type="text" name="cod_postal" value="<?= ValorPost('cod_postal') ?>">
         <?= VerError('cod_postal') ?> <br>
         <label>Provincia: </label>
-        <select name="provincia">
-            <option hidden selected>Selecciona una provincia</option>
-            <option value="21">Huelva</option>
-            <option value="29">Málaga</option>
-            <option value="23">Jaén</option>
-            <option value="41">Sevilla</option>
-            <option value="14">Córdoba</option>
-            <option value="04">Almería</option>
-            <option value="11">Cadíz</option>
-            <option value="18">Granada</option>
-        </select> <br>
+        <select>
+            <?php
+            $aProvincias = $bd->getProvincia();
+            foreach ($aProvincias as $idx => $value) {
+            ?>
+                <option value="<?php echo $idx ?>"><?php echo $value ?></option>
+            <?php
+            }
+            ?>
+        </select><br>
         <label>Estado: </label>
         <select name="estado">
             <option hidden selected>Selecciona un estado</option>
@@ -59,9 +58,16 @@
         <label>Fecha de creación de la tarea: </label>
         <input type="date" name="fecha_creacion" readonly value="<?= $fcha ?>"> <br>
         <label>Operario encargado: </label>
-        <select name="">
-            <option value=""></option>
-        </select> <br>
+        <select>
+            <?php
+            $aTrabajadores = $bd->getTrabajadores();
+            foreach ($aTrabajadores as $idx => $value) {
+            ?>
+                <option value="<?php echo $idx ?>"><?php echo $idx . " " . $value ?></option>
+            <?php
+            }
+            ?>
+        </select><br>
         <label>Fecha de realización: </label>
         <input type="date" name="fecha_realizacion" value="<?= ValorPost('fecha_realizacion') ?>">
         <?= VerError('fecha_realizacion') ?> <br>

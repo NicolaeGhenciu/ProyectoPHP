@@ -1,6 +1,9 @@
 <?php
 
-include "utilsforms.php";
+include("utilsforms.php");
+include("../models/conx_bd.php");
+
+$bd = conx_basedatos::getInstance();
 
 $hayError = FALSE;
 $errores = [];
@@ -42,7 +45,6 @@ if (!$_POST) { // Si no han enviado el fomulario
         $errores['fecha_realizacion'] = 'Campo fecha de realización se encuentra vacio o no es valido, la fecha tiene que ser posterior a la de hoy';
         $hayError = TRUE;
     }
-
     if ($hayError) {
         include("../views/formulario_tarea.php");
     }
