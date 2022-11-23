@@ -33,34 +33,20 @@ class conx_basedatos
         $usuario = 'root';
         $contraseña = '';
 
-        try {
-            $this->pdo = new PDO($dsn, $usuario, $contraseña);
-        } catch (PDOException $e) {
-            echo 'Falló la conexión: ' . $e->getMessage();
-        }
+        $this->pdo = new PDO($dsn, $usuario, $contraseña);
+
     }
 
-    function getProvincia()
+
+    function getListaSelect($tabla, $c_idx, $c_value, $condicion="")
     {
-        $this->stmt = $this->pdo->prepare('SELECT codPoblacion,nombre FROM poblacion');
+        $this->stmt = $this->pdo->prepare('SELECT ' . $c_idx . ',' . $c_value . ' FROM ' . $tabla . " " . $condicion);
         $this->stmt->execute();
 
-        $aProvincias = array();
+        $lista = array();
         while ($row = $this->stmt->fetch(PDO::FETCH_ASSOC)) {
-            $aProvincias[$row['codPoblacion']] = $row['nombre'];
+            $lista[$row[$c_idx]] = $row[$c_value];
         }
-        return $aProvincias;
-    }
-
-    function getTrabajadores()
-    {
-        $this->stmt = $this->pdo->prepare('SELECT nombre,apellidos FROM usuario WHERE esadmin=0');
-        $this->stmt->execute();
-
-        $aTrabajadores = array();
-        while ($row = $this->stmt->fetch(PDO::FETCH_ASSOC)) {
-            $aTrabajadores[$row['nombre']] = $row['apellidos'];
-        }
-        return $aTrabajadores;
+        return $lista;
     }
 }

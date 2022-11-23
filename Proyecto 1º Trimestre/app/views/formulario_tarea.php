@@ -37,16 +37,8 @@
         <input type="text" name="cod_postal" value="<?= ValorPost('cod_postal') ?>">
         <?= VerError('cod_postal') ?> <br>
         <label>Provincia: </label>
-        <select>
-            <?php
-            $aProvincias = $bd->getProvincia();
-            foreach ($aProvincias as $idx => $value) {
-            ?>
-                <option value="<?php echo $idx ?>"><?php echo $value ?></option>
-            <?php
-            }
-            ?>
-        </select><br>
+        <?= CreaSelect('prov', Provincias::listaParaSelect(), filter_input(INPUT_POST, 'prov')) ?>
+        <br>
         <label>Estado: </label>
         <select name="estado">
             <option hidden selected>Selecciona un estado</option>
@@ -58,16 +50,8 @@
         <label>Fecha de creación de la tarea: </label>
         <input type="date" name="fecha_creacion" readonly value="<?= $fcha ?>"> <br>
         <label>Operario encargado: </label>
-        <select>
-            <?php
-            $aTrabajadores = $bd->getTrabajadores();
-            foreach ($aTrabajadores as $idx => $value) {
-            ?>
-                <option value="<?php echo $idx ?>"><?php echo $idx . " " . $value ?></option>
-            <?php
-            }
-            ?>
-        </select><br>
+        <?= CreaSelect('trab', Usuarios::listaParaSelect(), filter_input(INPUT_POST, 'trab')) ?>
+        <br>
         <label>Fecha de realización: </label>
         <input type="date" name="fecha_realizacion" value="<?= ValorPost('fecha_realizacion') ?>">
         <?= VerError('fecha_realizacion') ?> <br>

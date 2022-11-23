@@ -1,9 +1,19 @@
 <?php
 
 include("utilsforms.php");
-include("../models/conx_bd.php");
+include("../libreria/creaSelect.php");
 
+include("../models/conx_bd.php");
 $bd = conx_basedatos::getInstance();
+include("../models/Provincias.php");
+include("../models/Usuarios.php");
+
+include("../libreria/validarCodigoPostal.php");
+include("../libreria/validarDni.php");
+include("../libreria/validarCIF.php");
+include("../libreria/validarEmail.php");
+include("../libreria/validarFechadeRealizacion.php");
+include("../libreria/validarTelefono.php");
 
 $hayError = FALSE;
 $errores = [];
@@ -29,7 +39,7 @@ if (!$_POST) { // Si no han enviado el fomulario
         $errores['cod_postal'] = 'Campo Codigo Postal tiene un formato incorrecto o se encuentra vacio';
         $hayError = TRUE;
     }
-    if (empty($_POST["nif_cif"]) || !validarDni($_POST["nif_cif"])) {
+    if (empty($_POST["nif_cif"]) || !validarCIF($_POST["nif_cif"]) && !validarDni($_POST["nif_cif"])) {
         $errores['nif_cif'] = 'Campo NIF o CIF tiene un formato incorrecto o se encuentra vacio';
         $hayError = TRUE;
     }
@@ -47,65 +57,5 @@ if (!$_POST) { // Si no han enviado el fomulario
     }
     if ($hayError) {
         include("../views/formulario_tarea.php");
-    }
-}
-
-function validarDni($dni)
-{
-    $dnisL = substr($dni, 0, -1);
-    $letra = substr($dni, -1);
-    $lista = "TRWAGMYFPDXBNJZSQVHLCKE";
-    $arLista = str_split($lista);
-
-    if (strlen($dnisL) == 8 && is_numeric($dnisL)) {
-        $resultado = (int)$dnisL % 23;
-        $letraAsign = $arLista[$resultado];
-        if ($letra == $letraAsign) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-}
-
-
-function validarTelefono($tel)
-{
-    $a = "^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$";
-    if (preg_match("/$a/", $tel)) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function validarCodigoPostal($cod)
-{
-    $a = "^(?:0[1-9]\d{3}|[1-4]\d{4}|5[0-2]\d{3})$";
-    if (preg_match("/$a/", $cod)) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function validarEmail($email)
-{
-    $a = "^[^0-9][a-zA-Z0-9]+([.][a-zA-Z0-9]+)*[@][a-zA-Z0-9]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$";
-    if (preg_match("/$a/", $email)) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function validarFechaRealizacion($fecha)
-{
-    $fecha = new DateTime($fecha);
-    $hoy = new DateTime();
-    if ($fecha <= $hoy) {
-        return false;
-    } else {
-        return true;
     }
 }
