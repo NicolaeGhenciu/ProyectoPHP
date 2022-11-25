@@ -34,11 +34,10 @@ class conx_basedatos
         $contraseña = '';
 
         $this->pdo = new PDO($dsn, $usuario, $contraseña);
-
     }
 
 
-    function getListaSelect($tabla, $c_idx, $c_value, $condicion="")
+    function getListaSelect($tabla, $c_idx, $c_value, $condicion = "")
     {
         $this->stmt = $this->pdo->prepare('SELECT ' . $c_idx . ',' . $c_value . ' FROM ' . $tabla . " " . $condicion);
         $this->stmt->execute();
@@ -48,5 +47,24 @@ class conx_basedatos
             $lista[$row[$c_idx]] = $row[$c_value];
         }
         return $lista;
+    }
+
+    function insertarCampos($tabla, $listaValues, $campos)
+    {
+
+        $cadena = '';
+
+        foreach ($campos as $valor) {
+
+            $cadena .= "'" . $valor . "'" . ",";
+
+        }
+
+        $cadena = substr($cadena, 0, -1);
+
+        $sql = "INSERT INTO " . $tabla . "(" . $listaValues . ") VALUES(" . $cadena . ")";
+
+        $resultado = $this->pdo->prepare($sql);
+        $resultado->execute(array());
     }
 }

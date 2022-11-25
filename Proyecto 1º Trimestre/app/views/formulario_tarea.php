@@ -34,10 +34,10 @@
         <label>Población: </label>
         <input type="text" name="poblacion"> <br>
         <label>Codigo Postal: </label>
-        <input type="text" name="cod_postal" value="<?= ValorPost('cod_postal') ?>">
-        <?= VerError('cod_postal') ?> <br>
+        <input type="text" name="codigo_postal" value="<?= ValorPost('codigo_postal') ?>">
+        <?= VerError('codigo_postal') ?> <br>
         <label>Provincia: </label>
-        <?= CreaSelect('prov', Provincias::listaParaSelect(), filter_input(INPUT_POST, 'prov')) ?>
+        <?= CreaSelect('provincias', Provincias::listaParaSelect(), filter_input(INPUT_POST, 'provincias')) ?>
         <br>
         <label>Estado: </label>
         <select name="estado">
@@ -50,7 +50,7 @@
         <label>Fecha de creación de la tarea: </label>
         <input type="date" name="fecha_creacion" readonly value="<?= $fcha ?>"> <br>
         <label>Operario encargado: </label>
-        <?= CreaSelect('trab', Usuarios::listaParaSelect(), filter_input(INPUT_POST, 'trab')) ?>
+        <?= CreaSelect('operario_encargado', Usuarios::listaParaSelect(), filter_input(INPUT_POST, 'operario_encargado')) ?>
         <br>
         <label>Fecha de realización: </label>
         <input type="date" name="fecha_realizacion" value="<?= ValorPost('fecha_realizacion') ?>">

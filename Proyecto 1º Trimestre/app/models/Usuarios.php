@@ -15,6 +15,6 @@ class Usuarios
 
     static function listaParaSelect()
     {
-        return conx_basedatos::getInstance()->getListaSelect('usuarios', 'nif', 'nombre','WHERE esadmin=0');
+        return conx_basedatos::getInstance()->getListaSelect('usuarios', 'nif', 'nombre','WHERE es_admin=0');
     }
 }

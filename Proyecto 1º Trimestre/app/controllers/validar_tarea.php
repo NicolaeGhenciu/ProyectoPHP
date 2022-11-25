@@ -7,6 +7,7 @@ include("../models/conx_bd.php");
 $bd = conx_basedatos::getInstance();
 include("../models/Provincias.php");
 include("../models/Usuarios.php");
+include("../models/Tareas.php");
 
 include("../libreria/validarCodigoPostal.php");
 include("../libreria/validarDni.php");
@@ -14,6 +15,8 @@ include("../libreria/validarCIF.php");
 include("../libreria/validarEmail.php");
 include("../libreria/validarFechadeRealizacion.php");
 include("../libreria/validarTelefono.php");
+
+include("../libreria/getContenido.php");
 
 $hayError = FALSE;
 $errores = [];
@@ -35,8 +38,8 @@ if (!$_POST) { // Si no han enviado el fomulario
         $errores['descripcion'] = 'Campo descripción se encuentra vacio';
         $hayError = TRUE;
     }
-    if (empty($_POST["cod_postal"]) || !validarCodigoPostal($_POST["cod_postal"])) {
-        $errores['cod_postal'] = 'Campo Codigo Postal tiene un formato incorrecto o se encuentra vacio';
+    if (empty($_POST["codigo_postal"]) || !validarCodigoPostal($_POST["codigo_postal"])) {
+        $errores['codigo_postal'] = 'Campo Codigo Postal tiene un formato incorrecto o se encuentra vacio';
         $hayError = TRUE;
     }
     if (empty($_POST["nif_cif"]) || !validarCIF($_POST["nif_cif"]) && !validarDni($_POST["nif_cif"])) {
@@ -57,5 +60,11 @@ if (!$_POST) { // Si no han enviado el fomulario
     }
     if ($hayError) {
         include("../views/formulario_tarea.php");
+    } else {
+
+        $todos_los_campos = $_POST;
+
+        Tareas::insertarTarea(getContenido($todos_los_campos, true), getContenido($todos_los_campos, false));
+        
     }
 }

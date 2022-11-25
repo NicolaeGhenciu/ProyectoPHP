@@ -1,6 +1,6 @@
 <?php
 
-class Provincias
+class Tareas
 {
     private function __construct()
     {
@@ -12,8 +12,8 @@ class Provincias
 
     //el static no funciona.
 
-    static function paraInsertar()
+    static function insertarTarea($campos, $names)
     {
-        
+        return conx_basedatos::getInstance()->insertarCampos('tareas', $names, $campos);
     }
 }
