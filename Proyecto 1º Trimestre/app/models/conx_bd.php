@@ -57,7 +57,7 @@ class conx_basedatos
         foreach ($campos as $valor) {
 
             $cadena .= "'" . $valor . "'" . ",";
-
+            
         }
 
         $cadena = substr($cadena, 0, -1);
@@ -66,5 +66,11 @@ class conx_basedatos
 
         $resultado = $this->pdo->prepare($sql);
         $resultado->execute(array());
+    }
+
+    function getCountTareas()
+    {
+        $stmt = $this->pdo->query("SELECT id FROM tareas GROUP BY id desc limit 1");
+        return $stmt->fetch();
     }
 }

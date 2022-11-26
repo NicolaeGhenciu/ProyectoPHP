@@ -15,6 +15,7 @@ include("../libreria/validarCIF.php");
 include("../libreria/validarEmail.php");
 include("../libreria/validarFechadeRealizacion.php");
 include("../libreria/validarTelefono.php");
+include("../libreria/subirArchivos.php");
 
 include("../libreria/getContenido.php");
 
@@ -58,13 +59,29 @@ if (!$_POST) { // Si no han enviado el fomulario
         $errores['fecha_realizacion'] = 'Campo fecha de realización se encuentra vacio o no es valido, la fecha tiene que ser posterior a la de hoy';
         $hayError = TRUE;
     }
+
+    $ultimoId = $bd->getCountTareas()[0] + 1;
+
     if ($hayError) {
         include("../views/formulario_tarea.php");
     } else {
 
         $todos_los_campos = $_POST;
 
+        if ($_FILES['fichero_resumen']['name'] == "") {
+            $todos_los_campos["fichero_resumen"] = "";
+        } else {
+            subirArchivo('fichero_resumen', $ultimoId);
+            $todos_los_campos["fichero_resumen"] = "Tarea-" . $ultimoId . "-" . $_FILES['fichero_resumen']['name'];
+        }
+
+        if ($_FILES['foto_trabajo']['name'] == "") {
+            $todos_los_campos["foto_trabajo"] = "";
+        } else {
+            subirArchivo('foto_trabajo', $ultimoId);
+            $todos_los_campos["foto_trabajo"] = "Tarea-" . $ultimoId . "-" . $_FILES['foto_trabajo']['name'];
+        }
+
         Tareas::insertarTarea(getContenido($todos_los_campos, true), getContenido($todos_los_campos, false));
-        
     }
 }
