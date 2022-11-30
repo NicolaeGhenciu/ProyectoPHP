@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * validarCIF
+ *
+ * @param  mixed $cif
+ * @return void
+ */
 function validarCIF($cif)
 {
 

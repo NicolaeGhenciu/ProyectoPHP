@@ -57,7 +57,6 @@ class conx_basedatos
         foreach ($campos as $valor) {
 
             $cadena .= "'" . $valor . "'" . ",";
-            
         }
 
         $cadena = substr($cadena, 0, -1);
@@ -66,6 +65,45 @@ class conx_basedatos
 
         $resultado = $this->pdo->prepare($sql);
         $resultado->execute(array());
+    }
+
+    public function numFilas($tabla)
+    {
+
+        $sql = "SELECT * FROM " . $tabla;
+
+        $resultado = $this->pdo->prepare($sql);
+        $resultado->execute();
+
+        $numFilas = $resultado->rowCount();
+
+        return $numFilas;
+    }
+
+    public function resultadosPorPagina($tabla, $empezarDesde, $tamanioPagina)
+    {
+
+        $queryLimite = "SELECT * FROM " . $tabla . " LIMIT " . $empezarDesde . "," . $tamanioPagina;
+
+        $resultado = $this->pdo->prepare($queryLimite);
+        $resultado->execute();
+
+        //Almacenamos el resultado de fetchAll en una variable/
+        $datos = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        /* while($registro = $resultado->fetch(PDO::FETCH_ASSOC)){
+
+            $lista = $registro["nombre"] . "<br>";
+
+            }*/
+
+        return $datos;
+    }
+
+    function getNifLogin($correo, $clave)
+    {
+        $stmt = $this->pdo->query("SELECT * FROM usuarios WHERE correo='" . $correo . "' AND clave='" . $clave . "'");
+        return $stmt->fetch();
     }
 
     function getCountTareas()

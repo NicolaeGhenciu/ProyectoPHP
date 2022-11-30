@@ -16,4 +16,16 @@ class Tareas
     {
         return conx_basedatos::getInstance()->insertarCampos('tareas', $names, $campos);
     }
+
+    static function getNumeroTareas()
+    {
+
+        return conx_basedatos::getInstance()->numFilas('tareas');
+    }
+
+    static function getTareasPorPagina($empezarDesde, $tamanioPagina)
+    {
+
+        return conx_basedatos::getInstance()->resultadosPorPagina('tareas', $empezarDesde, $tamanioPagina);
+    }
 }
