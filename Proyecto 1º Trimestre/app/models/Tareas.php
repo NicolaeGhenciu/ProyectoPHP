@@ -28,4 +28,19 @@ class Tareas
 
         return conx_basedatos::getInstance()->resultadosPorPagina('tareas', $empezarDesde, $tamanioPagina);
     }
+
+    static function borrarTarea($id)
+    {
+        return conx_basedatos::getInstance()->borrarTarea($id);
+    }
+
+    static function getdatosTarea($id)
+    {
+        return conx_basedatos::getInstance()->getTarea($id);
+    }
+
+    static function updateTareas($names, $campos, $id)
+    {
+        return conx_basedatos::getInstance()->updateTareas($names, $campos, $id);
+    }
 }

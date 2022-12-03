@@ -47,7 +47,6 @@
         <br>
         <label>Estado: </label>
         <select class="form-select" name="estado">
-            <option hidden selected>Selecciona un estado</option>
             <option value="B">B=Esperando ser aprobada</option>
             <option value="P">P=Pendiente</option>
             <option value="R">R=Realizada</option>
@@ -61,6 +60,7 @@
         <label>Fecha de realización: </label>
         <input class="form-control" type="date" name="fecha_realizacion" value="<?= ValorPost('fecha_realizacion') ?>">
         <?= VerError('fecha_realizacion') ?> <br>
+        <!--
         <label>Anotaciones anteriores: </label> <br>
         <textarea class="form-control" name="anotaciones_anteriores" cols="30" rows="3"></textarea> <br>
         <label>Anotaciones posteriores: </label> <br>
@@ -69,6 +69,7 @@
         <input class="form-control" name="fichero_resumen" type="file"> <br>
         <label>Fotos del trabajo realizado: </label> <br>
         <input class="form-control" name="foto_trabajo" type="file"> <br>
+        -->
         <button class="btn btn-primary mb-3" type="submit">Enviar</button>
     </form>
 </body>

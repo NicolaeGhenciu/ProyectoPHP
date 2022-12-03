@@ -1,51 +1,45 @@
 <?php
 
-    include('../models/Tareas.php');
-    include('../models/conx_bd.php');
-    include('../libreria/creaTable.php');
+include('../models/Tareas.php');
+include('../models/conx_bd.php');
+include('../libreria/creaTable.php');
 
-    //$listaTareas = Tarea::getListaTareas();
+//$listaTareas = Tarea::getListaTareas();
 
-    $nombreCampos = [
-        'id','nif_cif','nombre','apellidos','telefono','descripcion','email','direccion','poblacion',
-        'codigo_postal','provincias','estado','fecha_creacion','operario_encargado','fecha_realizacion',
-        'anotaciones_anteriores','anotaciones_posteriores','fichero_resumen','foto_trabajo'
-    ];
+$nombreCampos = [
+    'id', 'nif_cif', 'nombre', 'apellidos', 'descripcion', 'poblacion',
+    'estado', 'fecha_creacion', 'operario_encargado', 'fecha_realizacion',
+];
 
+// Preparar
 
-     // Preparar
+$tamanioPagina = 10;
 
-     $tamanioPagina = 5;
+if (isset($_GET['pagina'])) {
 
-     if(isset($_GET['pagina'])){
+    if ($_GET['pagina'] == 1) {
 
-         if($_GET['pagina'] == 1){
+        header('location:procesarListaTareas.php');
+    } else {
 
-             header('location:procesarListaTareas.php');
-         
-         }else{
-         
-             $pagina = $_GET['pagina'];
+        $pagina = $_GET['pagina'];
+    }
+} else {
 
-         }
+    $pagina = 1;
+}
 
-     }else{
+$empezarDesde = ($pagina - 1) * $tamanioPagina;
+//echo "empezardesde: " . $empezarDesde . " pagina: " . $pagina . "<br>";
 
-         $pagina = 1;
+$numFilas = Tareas::getNumeroTareas();
+$totalPaginas = ceil($numFilas / $tamanioPagina);
 
-     }
+$registro = Tareas::getTareasPorPagina($empezarDesde, $tamanioPagina);
 
-     $empezarDesde = ($pagina-1) * $tamanioPagina;
-    //echo "empezardesde: " . $empezarDesde . " pagina: " . $pagina . "<br>";
+include('../views/listaTareas.php');
 
-    $numFilas = Tareas::getNumeroTareas();
-    $totalPaginas = ceil($numFilas / $tamanioPagina);
+for ($i = 1; $i <= $totalPaginas; $i++) {
 
-    $registro = Tareas::getTareasPorPagina($empezarDesde, $tamanioPagina);
-
-    include('../views/listaTareas.php');
-
-        for($i = 1; $i <= $totalPaginas; $i++){
-
-            echo "<a href='?pagina=" . $i . "'>" . $i . "</a> ";
-        }
+    echo "<a href='?pagina=" . $i . "'>" . $i . "</a> ";
+}

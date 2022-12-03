@@ -1,5 +1,7 @@
 <?php
 
+use function PHPSTORM_META\type;
+
 class conx_basedatos
 {
     public $_pdo;
@@ -80,10 +82,12 @@ class conx_basedatos
         return $numFilas;
     }
 
-    public function resultadosPorPagina($tabla, $empezarDesde, $tamanioPagina)
+    public function resultadosPorPagina($tareas, $empezarDesde, $tamanioPagina)
     {
 
-        $queryLimite = "SELECT * FROM " . $tabla . " LIMIT " . $empezarDesde . "," . $tamanioPagina;
+        $queryLimite = "SELECT id,nif_cif,nombre,apellidos,telefono,descripcion,email,direccion,poblacion,
+        codigo_postal,provincias,estado,DATE_FORMAT(fecha_creacion, '%d/%m/%Y') AS fecha_creacion ,operario_encargado, DATE_FORMAT(fecha_realizacion, '%d/%m/%Y') AS fecha_realizacion,
+        anotaciones_anteriores,anotaciones_posteriores,fichero_resumen,foto_trabajo FROM `tareas` ORDER BY fecha_realizacion " .  " LIMIT " . $empezarDesde . "," . $tamanioPagina;
 
         $resultado = $this->pdo->prepare($queryLimite);
         $resultado->execute();
@@ -110,5 +114,41 @@ class conx_basedatos
     {
         $stmt = $this->pdo->query("SELECT id FROM tareas GROUP BY id desc limit 1");
         return $stmt->fetch();
+    }
+
+    function borrarTarea($idt)
+    {
+
+        $sql = "DELETE FROM tareas WHERE id = $idt";
+
+        $resultado = $this->pdo->prepare($sql);
+        $resultado->execute();
+    }
+
+    function getTarea($idt)
+    {
+        $stmt = $this->pdo->query("SELECT * FROM tareas WHERE id = $idt");
+        return $stmt->fetch();
+    }
+
+    function updateTareas($nombres, $campos, $idt)
+    {
+
+        $cadena = '';
+
+        $a_campos = explode(",", $campos);
+
+        foreach ($nombres as $valor => $contenido) {
+
+            $cadena .= $a_campos[$valor] . " = '" .  $contenido . "' ,";
+        }
+
+        $cadena = substr($cadena, 0, -1);
+
+        $sql = "UPDATE tareas SET " . $cadena ." WHERE id = $idt";
+
+        $resultado = $this->pdo->prepare($sql);
+        $resultado->execute(array());
+    
     }
 }

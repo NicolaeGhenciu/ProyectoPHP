@@ -1,10 +1,9 @@
 <?php
 
-include("utilsforms.php");
-include("../libreria/creaSelect.php");
-
 include("../models/conx_bd.php");
-$bd = conx_basedatos::getInstance();
+include("../libreria/creaSelect.php");
+include("../controllers/utilsforms.php");
+
 include("../models/Provincias.php");
 include("../models/Usuarios.php");
 include("../models/Tareas.php");
@@ -21,10 +20,15 @@ include("../libreria/getContenido.php");
 
 $hayError = FALSE;
 $errores = [];
-$fcha = date("Y-m-d");
 
 if (!$_POST) { // Si no han enviado el fomulario
-    include("../views/formulario_tarea.php");
+
+    $id = $_GET['id'];
+
+    $datosTarea = Tareas::getdatosTarea($id);
+
+    include("../views/formularioModificarTarea.php");
+
 } else {
 
     if (empty($_POST["nombre"])) {
@@ -55,41 +59,31 @@ if (!$_POST) { // Si no han enviado el fomulario
         $errores['email'] = 'Campo email tiene un formato incorrecto o se encuentra vacio';
         $hayError = TRUE;
     }
-    if (empty($_POST["fecha_realizacion"]) || !validarFechaRealizacion($_POST["fecha_realizacion"])) {
-        $errores['fecha_realizacion'] = 'Campo fecha de realización se encuentra vacio o no es valido, la fecha tiene que ser posterior a la de hoy';
-        $hayError = TRUE;
-    }
 
     if ($hayError) {
-        include("../views/formulario_tarea.php");
+        $id = $_GET['id'];
+        include("../views/formularioModificarTarea.php");
     } else {
         $todos_los_campos = $_POST;
-        Tareas::insertarTarea(getContenido($todos_los_campos, true), getContenido($todos_los_campos, false));
-    }
 
-    //$ultimoId = $bd->getCountTareas()[0] + 1;
-    /*
-    if ($hayError) {
-        include("../views/formulario_tarea.php");
-    } else {
-
-        $todos_los_campos = $_POST;
+        $id = $_GET['id'];
 
         if ($_FILES['fichero_resumen']['name'] == "") {
             $todos_los_campos["fichero_resumen"] = "";
         } else {
-            subirArchivo('fichero_resumen', $ultimoId);
-            $todos_los_campos["fichero_resumen"] = "Tarea-" . $ultimoId . "-" . $_FILES['fichero_resumen']['name'];
+            subirArchivo('fichero_resumen', $id);
+            $todos_los_campos["fichero_resumen"] = "Tarea-" . $id . "-" . $_FILES['fichero_resumen']['name'];
         }
 
         if ($_FILES['foto_trabajo']['name'] == "") {
             $todos_los_campos["foto_trabajo"] = "";
         } else {
-            subirArchivo('foto_trabajo', $ultimoId);
-            $todos_los_campos["foto_trabajo"] = "Tarea-" . $ultimoId . "-" . $_FILES['foto_trabajo']['name'];
+            subirArchivo('foto_trabajo', $id);
+            $todos_los_campos["foto_trabajo"] = "Tarea-" . $id . "-" . $_FILES['foto_trabajo']['name'];
         }
-        */
 
-    //}
+        Tareas::updateTareas(getContenido($todos_los_campos, true), getContenido($todos_los_campos, false), $id);
 
+        header("location:procesarListaTareas.php");
+    }
 }
