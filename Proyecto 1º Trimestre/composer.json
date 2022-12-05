@@ -1,0 +1,18 @@
+{
+    "name": "nico/pro1t",
+    "require": {
+        "slim/slim": "3.*",
+        "jenssegers/blade": "^1.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nico\\Pro1t\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nicolae Adrian Ghenciu",
+            "email": "nicolaeadrianghenciu@gmial.com"
+        }
+    ]
+}

@@ -1,13 +1,13 @@
 <?php
 
 include("utilsforms.php");
-include("../models/conx_bd.php");
+//include("../models/conx_bd.php");
+include("varios.php");
 
-
-$bd = conx_basedatos::getInstance();
+//$bd = conx_basedatos::getInstance();
 
 if (!$_POST) { // Si no han enviado el fomulario
-    include("../views/login.php");
+    echo $blade->render('login');
 } else {
 
     $email = $_POST['email'];
@@ -16,9 +16,11 @@ if (!$_POST) { // Si no han enviado el fomulario
     $usuario = $bd->getNifLogin($email, $pass);
 
     if (isset($usuario['nif'])) {
-        echo "Bienvenido "  . $usuario['nombre'];
-        include("../views/menu.php");
+        //echo "Bienvenido "  . $usuario['nombre'];
+        echo $blade->render('nada', [
+            'usuario' => $usuario['nombre'],
+        ]);
     } else {
-        include("../views/login.php");
+        echo $blade->render('login');
     }
 }

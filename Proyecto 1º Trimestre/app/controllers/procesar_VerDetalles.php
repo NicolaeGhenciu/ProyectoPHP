@@ -9,9 +9,5 @@ $id = $_GET["id"];
 
 $datosTarea = Tareas::getdatosTarea($id);
 
-$datos = getContenido($datosTarea,false);
-
-//include("../views/verDetalles.php");
-
-
+include("../views/verDetalles.php");
 

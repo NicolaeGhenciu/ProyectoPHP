@@ -44,7 +44,7 @@
         <input class="form-control" type="text" name="codigo_postal" value="<?= isset($datosTarea["codigo_postal"]) ? $datosTarea["codigo_postal"] : ValorPost('codigo_postal') ?>">
         <?= VerError('codigo_postal') ?> <br>
         <label>Provincia: </label>
-        <?= CreaSelect('provincias', Provincias::listaParaSelect(), filter_input(INPUT_POST, 'provincias')) ?>
+        <?= CreaSelect('provincias', Provincias::listaParaSelect(), (isset($datosTarea["provincias"]) ? $datosTarea["provincias"] : ValorPost('provincias')) ,filter_input(INPUT_POST, 'provincias')) ?>
         <br>
         <label>Estado: </label>
         <select class="form-select" name="estado">
@@ -56,7 +56,7 @@
         <label>Fecha de creación de la tarea: </label>
         <input class="form-control" type="date" name="fecha_creacion" value="<?= isset($datosTarea["fecha_creacion"]) ? $datosTarea["fecha_creacion"] : ValorPost('fecha_creacion') ?>"> <br>
         <label>Operario encargado: </label>
-        <?= CreaSelect('operario_encargado', Usuarios::listaParaSelect(), filter_input(INPUT_POST, 'operario_encargado')) ?>
+        <?= CreaSelect('operario_encargado', Usuarios::listaParaSelect(), (isset($datosTarea["operario_encargado"]) ? $datosTarea["operario_encargado"] : ValorPost('operario_encargado')), filter_input(INPUT_POST, 'operario_encargado')) ?>
         <br>
         <label>Fecha de realización: </label>
         <input class="form-control" type="date" name="fecha_realizacion" value="<?= isset($datosTarea["fecha_realizacion"]) ? $datosTarea["fecha_realizacion"] : ValorPost('fecha_realizacion') ?>">

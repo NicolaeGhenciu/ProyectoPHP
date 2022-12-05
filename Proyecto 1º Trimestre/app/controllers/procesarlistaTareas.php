@@ -1,5 +1,5 @@
 <?php
-
+include(__DIR__ . '/varios.php');
 include('../models/Tareas.php');
 include('../models/conx_bd.php');
 include('../libreria/creaTable.php');
@@ -32,14 +32,22 @@ $totalPaginas = ceil($numFilas / $tamanioPagina);
 
 $registro = Tareas::getTareasPorPagina($empezarDesde, $tamanioPagina);
 
-include('../views/listaTareas.php');
+//include('../views/listaTareas.php');
+echo $blade->render('listaTareas', [
+    'tareas' => Tareas::getTareasPorPagina($empezarDesde, $tamanioPagina),
+    'nombreCampos' => $nombreCampos,
+    'empezarDesde' => $empezarDesde,
+    'tamanioPagina' => $tamanioPagina,
+    'pagina' => $pagina,
+    'totalPaginas' => $totalPaginas
+
+]);
 
 if (isset($_GET['numPag'])) {
 
     if ($_GET['numPag'] < 1 || $_GET['numPag'] > $totalPaginas) {
 
         $url = "procesarlistaTareas.php?pagina=" . $pagina;
-        
     } else {
 
         $url = "procesarlistaTareas.php?pagina=" . $_GET['numPag'];
