@@ -9,9 +9,9 @@
 </head>
 
 <body>
-    <h3>¿Estas seguro de querer borrar la tarea <?= $_GET['id'] ?> ?</h3>
-    <a href="../controllers/controlador_borrar.php?id=<?= $_GET['id'] ?>">Si</a>
-    <a href="..//controllers/procesarlistaTareas.php">No</a>
+
+    <?= creaTable('Detalles', $datos, $datos) ?>
+
 </body>
 
 </html>

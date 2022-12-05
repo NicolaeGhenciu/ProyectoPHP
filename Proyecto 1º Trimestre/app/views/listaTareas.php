@@ -11,6 +11,25 @@
 <body>
     
     <?= creaTable('listaTareas', $nombreCampos, Tareas::getTareasPorPagina($empezarDesde, $tamanioPagina)) ?>
+
+    <a href="?pagina=1" class='btn btn-info' role='button'>Primera</a>
+
+    <a href="?pagina=<?=($pagina==1) ? $pagina : $pagina - 1 ?>" class='btn btn-info' role='button'>Anterior</a>
+
+    <span>Página <?=$pagina ?></span>
+
+    <a href="?pagina=<?=($pagina==$totalPaginas) ? $pagina : $pagina + 1 ?>" class='btn btn-info' role='button'>Sigiente</a>
+
+    <a href="?pagina=<?=$totalPaginas?>" class='btn btn-info' role='button'>Última</a>
+
+    <span>Nº páginas: <?=$totalPaginas ?></span>
+
+    <br> <br>
+
+    <form action="../controllers/procesarListaTareas.php" method="get">
+        <input type="text" name="numPag">
+        <button>Ir a página</button>
+    </form>
  
 </body>
 </html>

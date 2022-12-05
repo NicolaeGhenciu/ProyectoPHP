@@ -25,7 +25,7 @@ function creaTable($name, $nombreCampos, $listaValores)
 
         $html .= '<td class="bot"><a href="../views/mensajeBorrarTarea.php?id=' . $valor['id'] . '">Borrar</a></td>
             <td class="bot"><a href="../controllers/validar_modficiacion_tarea.php?id=' . $valor['id'] . '">Modificar</a></td>
-            <td class="bot"><a href="../controllers/verDetalles.php?id=' . $valor['id'] . '">Detalles</a></td></tr>';
+            <td class="bot"><a href="../controllers/procesar_VerDetalles.php?id=' . $valor['id'] . '">Detalles</a></td></tr>';
 
     endforeach;
 

@@ -4,14 +4,10 @@ include('../models/Tareas.php');
 include('../models/conx_bd.php');
 include('../libreria/creaTable.php');
 
-//$listaTareas = Tarea::getListaTareas();
-
 $nombreCampos = [
     'id', 'nif_cif', 'nombre', 'apellidos', 'descripcion', 'poblacion',
     'estado', 'fecha_creacion', 'operario_encargado', 'fecha_realizacion',
 ];
-
-// Preparar
 
 $tamanioPagina = 10;
 
@@ -19,7 +15,7 @@ if (isset($_GET['pagina'])) {
 
     if ($_GET['pagina'] == 1) {
 
-        header('location:procesarListaTareas.php');
+        header('location:procesarlistaTareas.php');
     } else {
 
         $pagina = $_GET['pagina'];
@@ -30,7 +26,6 @@ if (isset($_GET['pagina'])) {
 }
 
 $empezarDesde = ($pagina - 1) * $tamanioPagina;
-//echo "empezardesde: " . $empezarDesde . " pagina: " . $pagina . "<br>";
 
 $numFilas = Tareas::getNumeroTareas();
 $totalPaginas = ceil($numFilas / $tamanioPagina);
@@ -39,7 +34,16 @@ $registro = Tareas::getTareasPorPagina($empezarDesde, $tamanioPagina);
 
 include('../views/listaTareas.php');
 
-for ($i = 1; $i <= $totalPaginas; $i++) {
+if (isset($_GET['numPag'])) {
 
-    echo "<a href='?pagina=" . $i . "'>" . $i . "</a> ";
+    if ($_GET['numPag'] < 1 || $_GET['numPag'] > $totalPaginas) {
+
+        $url = "procesarlistaTareas.php?pagina=" . $pagina;
+        
+    } else {
+
+        $url = "procesarlistaTareas.php?pagina=" . $_GET['numPag'];
+    }
+
+    header("Location:$url");
 }

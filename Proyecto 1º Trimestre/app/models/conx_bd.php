@@ -95,12 +95,6 @@ class conx_basedatos
         //Almacenamos el resultado de fetchAll en una variable/
         $datos = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
-        /* while($registro = $resultado->fetch(PDO::FETCH_ASSOC)){
-
-            $lista = $registro["nombre"] . "<br>";
-
-            }*/
-
         return $datos;
     }
 
