@@ -82,12 +82,41 @@ class conx_basedatos
         return $numFilas;
     }
 
+    public function numFilasPendientes($tabla)
+    {
+
+        $sql = "SELECT * FROM " . $tabla . " WHERE estado='P'";
+
+        $resultado = $this->pdo->prepare($sql);
+        $resultado->execute();
+
+        $numFilas = $resultado->rowCount();
+
+        return $numFilas;
+    }
+
     public function resultadosPorPagina($tareas, $empezarDesde, $tamanioPagina)
     {
 
         $queryLimite = "SELECT id,nif_cif,nombre,apellidos,telefono,descripcion,email,direccion,poblacion,
         codigo_postal,provincias,estado,DATE_FORMAT(fecha_creacion, '%d/%m/%Y') AS fecha_creacion ,operario_encargado, DATE_FORMAT(fecha_realizacion, '%d/%m/%Y') AS fecha_realizacion,
         anotaciones_anteriores,anotaciones_posteriores,fichero_resumen,foto_trabajo FROM `tareas` ORDER BY fecha_realizacion " .  " LIMIT " . $empezarDesde . "," . $tamanioPagina;
+
+        $resultado = $this->pdo->prepare($queryLimite);
+        $resultado->execute();
+
+        //Almacenamos el resultado de fetchAll en una variable/
+        $datos = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        return $datos;
+    }
+
+    public function resultadosPorPaginaPendietes($tareas, $empezarDesde, $tamanioPagina)
+    {
+
+        $queryLimite = "SELECT id,nif_cif,nombre,apellidos,telefono,descripcion,email,direccion,poblacion,
+        codigo_postal,provincias,estado,DATE_FORMAT(fecha_creacion, '%d/%m/%Y') AS fecha_creacion ,operario_encargado, DATE_FORMAT(fecha_realizacion, '%d/%m/%Y') AS fecha_realizacion,
+        anotaciones_anteriores,anotaciones_posteriores,fichero_resumen,foto_trabajo FROM `tareas` WHERE estado='P'  ORDER BY fecha_realizacion " .  " LIMIT " . $empezarDesde . "," . $tamanioPagina;
 
         $resultado = $this->pdo->prepare($queryLimite);
         $resultado->execute();

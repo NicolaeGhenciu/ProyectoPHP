@@ -18,7 +18,7 @@ if (isset($_GET['pagina'])) {
 
     if ($_GET['pagina'] == 1) {
 
-        header('location:procesarListaTareas.php');
+        header('location:procesarListaTareasPendientes.php');
     } else {
 
         $pagina = $_GET['pagina'];
@@ -28,8 +28,7 @@ if (isset($_GET['pagina'])) {
     $pagina = 1;
 }
 
-
-$numFilas = Tareas::getNumeroTareas();
+$numFilas = Tareas::getNumeroTareasPendientes();
 $totalPaginas = ceil($numFilas / $tamanioPagina);
 
 /**
@@ -48,8 +47,9 @@ $empezarDesde = ($pagina - 1) * $tamanioPagina;
 
 $listaValores = [];
 
-echo $blade->render('listaTareas', [
-    'tareas' => Tareas::getTareasPorPagina($empezarDesde, $tamanioPagina),
+
+echo $blade->render('listaTareasPendientes', [
+    'tareas' => Tareas::getTareasPorPaginaPendietes($empezarDesde, $tamanioPagina),
     'nombreCampos' => $nombreCampos,
     'empezarDesde' => $empezarDesde,
     'tamanioPagina' => $tamanioPagina,
@@ -57,20 +57,3 @@ echo $blade->render('listaTareas', [
     'totalPaginas' => $totalPaginas
 
 ]);
-
-
-/*
-
-if (isset($_GET['valor'])) {
-    
-    echo $blade->render('listaTareas', [
-        'tareas' => Tareas::getTareasPorPaginaPendietes($empezarDesde, $tamanioPagina),
-        'nombreCampos' => $nombreCampos,
-        'empezarDesde' => $empezarDesde,
-        'tamanioPagina' => $tamanioPagina,
-        'pagina' => $pagina,
-        'totalPaginas' => $totalPaginas
-
-    ]);
-
-    */

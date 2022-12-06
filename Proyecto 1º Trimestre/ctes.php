@@ -5,6 +5,10 @@ define('CACHE_PATH', __DIR__.'/app/views/cache/');
 define('CTRL_PATH', __DIR__.'/app/controllers/');
 define('VIEW_PATH',__DIR__.'/app/views/');
 
+
+
+
+
 //if (!defined('APP_PATH')) {
     //define('VIEW_PATH', __DIR__.'/views/');
     //define('CACHE_PATH', __DIR__.'/views/cache/');

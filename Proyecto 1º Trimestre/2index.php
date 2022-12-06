@@ -1,6 +1,6 @@
 <?php
 // Evitamos errores "deprecated" en php 8.1 que tenemos con la versión de jessengers blade
-//error_reporting(E_ERROR | E_WARNING | E_PARSE);
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 // Estamos trabajando con espacios de nombres, hay objetos que queremos simplificar su nombre
 use Psr\Http\Message\ResponseInterface as Response;
@@ -19,7 +19,7 @@ require __DIR__ . '/../vendor/autoload.php'; // Autocargador para los componente
 require __DIR__ . '/../ctes.php'; // definimos constantes que facilitan el trabajo
 
 include(MODEL_PATH . '/conx_bd.php');
-require(CTRL_PATH . '/validar_login.php');
+include(CTRL_PATH . '/validar_login.php');
 
 // Habilitamos errores detallados para que nos informe de cualquier contratiempo
 // https://www.slimframework.com/docs/v3/handlers/error.html
@@ -28,15 +28,9 @@ require(CTRL_PATH . '/validar_login.php');
  * Creamos la aplicación
  */
 
-$configuration = [
-    'settings' => [
-        'displayErrorDetails' => true,
-    ],
-];
+$app = new \Slim\App(['settings' => ['displayErrorDetails' => true,],]);
 
-$app = new \Slim\App($configuration);
+// Página de login (observad que entramos por get/post/put/... al poner any())
+$app->any('', function (Request $request, Response $response, $args) {
 
-// Página principal
-$app->get('', function (Request $request, Response $response, $args) {
-    return Ctrl_Login::getInstance()->Inicio();
 });

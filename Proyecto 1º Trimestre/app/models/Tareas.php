@@ -23,10 +23,22 @@ class Tareas
         return conx_basedatos::getInstance()->numFilas('tareas');
     }
 
+    static function getNumeroTareasPendientes()
+    {
+
+        return conx_basedatos::getInstance()->numFilasPendientes('tareas');
+    }
+
     static function getTareasPorPagina($empezarDesde, $tamanioPagina)
     {
 
         return conx_basedatos::getInstance()->resultadosPorPagina('tareas', $empezarDesde, $tamanioPagina);
+    }
+
+    static function getTareasPorPaginaPendietes($empezarDesde, $tamanioPagina)
+    {
+
+        return conx_basedatos::getInstance()->resultadosPorPaginaPendietes('tareas', $empezarDesde, $tamanioPagina);
     }
 
     static function borrarTarea($id)
