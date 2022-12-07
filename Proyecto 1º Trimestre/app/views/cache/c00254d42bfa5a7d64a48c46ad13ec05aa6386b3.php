@@ -14,7 +14,10 @@
 </head>
 
 <body>
-    <form action="../controllers/validar_tarea.php" method="post" enctype="multipart/form-data">
+    
+
+    <?php $__env->startSection('cuerpo'); ?>
+    <form action="/app/controllers/insertar_tarea.php" method="post" enctype="multipart/form-data">
         <h3>Formulario Tarea</h3>
         <label>NIF o CIF:</label>
         <input class="form-control" type="text" name="nif_cif" value="<?= ValorPost('nif_cif') ?>">
@@ -72,6 +75,8 @@
         -->
         <button class="btn btn-primary mb-3" type="submit">Enviar</button>
     </form>
+    <?php $__env->stopSection(); ?>
 </body>
 
 </html>
+<?php echo $__env->make('_template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\PHP\Proyecto 1º Trimestre\app\views/formulario_tarea.blade.php ENDPATH**/ ?>

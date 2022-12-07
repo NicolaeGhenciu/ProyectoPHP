@@ -14,6 +14,7 @@ $tamanioPagina = 10;
 /**
  * Comprobar si se ha enviado por parametro el valor de la página a mostrar
  */
+
 if (isset($_GET['pagina'])) {
 
     if ($_GET['pagina'] == 1) {
@@ -57,20 +58,3 @@ echo $blade->render('listaTareas', [
     'totalPaginas' => $totalPaginas
 
 ]);
-
-
-/*
-
-if (isset($_GET['valor'])) {
-    
-    echo $blade->render('listaTareas', [
-        'tareas' => Tareas::getTareasPorPaginaPendietes($empezarDesde, $tamanioPagina),
-        'nombreCampos' => $nombreCampos,
-        'empezarDesde' => $empezarDesde,
-        'tamanioPagina' => $tamanioPagina,
-        'pagina' => $pagina,
-        'totalPaginas' => $totalPaginas
-
-    ]);
-
-    */

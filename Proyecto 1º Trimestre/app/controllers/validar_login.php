@@ -1,9 +1,7 @@
 <?php
 
-include("utilsforms.php");
-include("../models/conx_bd.php");
+include(__DIR__. "/../models/conx_bd.php");
 include("varios.php");
-
 $bd = conx_basedatos::getInstance();
 
 if (!$_POST) { // Si no han enviado el fomulario

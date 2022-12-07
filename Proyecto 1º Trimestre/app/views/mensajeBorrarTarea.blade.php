@@ -9,9 +9,15 @@
 </head>
 
 <body>
+    @extends('_template')
+
+    @section('cuerpo')
+
     <h3>¿Estas seguro de querer borrar la tarea <?= $_GET['id'] ?> ?</h3>
-    <a href="../controllers/controlador_borrar.php?id=<?= $_GET['id'] ?>">Si</a>
-    <a href="..//controllers/procesarlistaTareas.php">No</a>
+    <a href="/app/controllers/controlador_borrar.php?id=<?= $_GET['id'] ?>">Si</a>
+    <a href="/app/controllers/procesarlistaTareas.php">No</a>
+
+    @endsection
 </body>
 
 </html>

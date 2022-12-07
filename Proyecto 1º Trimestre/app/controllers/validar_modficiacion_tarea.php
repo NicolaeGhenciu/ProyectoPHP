@@ -1,6 +1,7 @@
 <?php
 
 include("../models/conx_bd.php");
+include("../controllers/varios.php");
 include("../libreria/creaSelect.php");
 include("../controllers/utilsforms.php");
 
@@ -18,6 +19,7 @@ include("../libreria/subirArchivos.php");
 
 include("../libreria/getContenido.php");
 
+
 $hayError = FALSE;
 $errores = [];
 
@@ -27,7 +29,11 @@ if (!$_POST) { // Si no han enviado el fomulario
 
     $datosTarea = Tareas::getdatosTarea($id);
 
-    include("../views/formularioModificarTarea.php");
+    //include("../views/formularioModificarTarea.php");
+    echo $blade->render('formularioModificarTarea',[
+        'datosTarea' => $datosTarea,
+        'id' => $id,
+    ]);
 
 } else {
 
@@ -62,7 +68,9 @@ if (!$_POST) { // Si no han enviado el fomulario
 
     if ($hayError) {
         $id = $_GET['id'];
-        include("../views/formularioModificarTarea.php");
+        echo $blade->render('formularioModificarTarea',[
+            'id' => $id,
+        ]);
     } else {
         $todos_los_campos = $_POST;
 

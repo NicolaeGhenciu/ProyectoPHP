@@ -9,8 +9,10 @@
 </head>
 
 <body>
+    @extends('_template')
 
-    <table>
+    @section('cuerpo')
+    <table class="table table-bordered">
         <tr>
             <th>ID</th>
             <th>NIF/CIF</th>
@@ -55,7 +57,7 @@
         </tr>
     </table>
     <a href="..//controllers/procesarlistaTareas.php">Volver atras</a>
-
+    @endsection
 </body>
 
 </html>

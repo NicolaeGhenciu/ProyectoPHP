@@ -1,4 +1,3 @@
-<div style="float:left; width:8em; border-radius: 5px; border:1px solid #aaa; background: #ccffcc; margin-right: 1em;">
-    <a href="../controllers/procesarlistaTareas.php">Ver Lista Tareas</a>
-    <a href="../controllers/procesarlistaTareasPendientes.php">Ver Lista Tareas Pendientes</a>
-</div><?php /**PATH C:\xampp\htdocs\PHP\Proyecto 1º Trimestre\app\views/menu.blade.php ENDPATH**/ ?>
+<div class="container-fluid"><a class="navbar-brand" href="/app/controllers/procesarlistaTareas.php">Ver Lista Tareas</a></div>
+<div class="container-fluid"><a class="navbar-brand" href="/app/controllers/procesarlistaTareasPendientes.php">Ver Lista Tareas Pendientes</a></div>
+<div class="container-fluid"><a class="navbar-brand" href="/app/controllers/insertar_tarea.php">Insertar Tarea</a></div><?php /**PATH C:\xampp\htdocs\PHP\Proyecto 1º Trimestre\app\views/menu.blade.php ENDPATH**/ ?>

@@ -14,8 +14,10 @@
 </head>
 
 <body>
+    
 
-    <form action='../controllers/validar_modficiacion_tarea.php?id=<?= $id ?>' method="post" enctype="multipart/form-data">
+    <?php $__env->startSection('cuerpo'); ?>
+    <form action='/app/controllers/validar_modficiacion_tarea.php?id=<?= $id ?>' method="post" enctype="multipart/form-data">
         <h3>Modificaciones Tarea</h3>
         <label>NIF o CIF:</label>
         <input class="form-control" type="text" name="nif_cif" value="<?= isset($datosTarea["nif_cif"]) ? $datosTarea["nif_cif"] : ValorPost('nif_cif') ?>">
@@ -44,7 +46,7 @@
         <input class="form-control" type="text" name="codigo_postal" value="<?= isset($datosTarea["codigo_postal"]) ? $datosTarea["codigo_postal"] : ValorPost('codigo_postal') ?>">
         <?= VerError('codigo_postal') ?> <br>
         <label>Provincia: </label>
-        <?= CreaSelect('provincias', Provincias::listaParaSelect(), (isset($datosTarea["provincias"]) ? $datosTarea["provincias"] : ValorPost('provincias')) ,filter_input(INPUT_POST, 'provincias')) ?>
+        <?= CreaSelect('provincias', Provincias::listaParaSelect(), (isset($datosTarea["provincias"]) ? $datosTarea["provincias"] : ValorPost('provincias')), filter_input(INPUT_POST, 'provincias')) ?>
         <br>
         <label>Estado: </label>
         <select class="form-select" name="estado">
@@ -71,6 +73,8 @@
         <input class="form-control" name="foto_trabajo" type="file"> <br>
         <button class="btn btn-primary mb-3" type="submit">Enviar</button>
     </form>
+    <?php $__env->stopSection(); ?>
 </body>
 
 </html>
+<?php echo $__env->make('_template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\PHP\Proyecto 1º Trimestre\app\views/formularioModificarTarea.blade.php ENDPATH**/ ?>

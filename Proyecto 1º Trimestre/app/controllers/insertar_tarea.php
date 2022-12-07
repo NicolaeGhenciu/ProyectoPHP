@@ -1,5 +1,6 @@
 <?php
 
+include("varios.php");
 include("utilsforms.php");
 include("../libreria/creaSelect.php");
 
@@ -24,7 +25,9 @@ $errores = [];
 $fcha = date("Y-m-d");
 
 if (!$_POST) { // Si no han enviado el fomulario
-    include("../views/formulario_tarea.php");
+    echo $blade->render('formulario_tarea', [
+        'fcha' => $fcha,
+    ]);
 } else {
 
     if (empty($_POST["nombre"])) {
@@ -61,10 +64,13 @@ if (!$_POST) { // Si no han enviado el fomulario
     }
 
     if ($hayError) {
-        include("../views/formulario_tarea.php");
+        echo $blade->render('formulario_tarea', [
+            'fcha' => $fcha,
+        ]);
     } else {
         $todos_los_campos = $_POST;
         Tareas::insertarTarea(getContenido($todos_los_campos, true), getContenido($todos_los_campos, false));
+        header("location:procesarListaTareas.php");
     }
 
     //$ultimoId = $bd->getCountTareas()[0] + 1;
