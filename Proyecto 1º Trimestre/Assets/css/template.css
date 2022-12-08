@@ -1,0 +1,10 @@
+form {
+    width: 600px;
+    margin-left: 500px;
+    margin-right: 500px;
+    text-align: center;
+}
+
+nav>div{
+   padding-right: 50px;
+}

@@ -9,4 +9,5 @@ function subirArchivo($fich, $id)
 
         move_uploaded_file($_FILES[$fich]['tmp_name'], $dest);
     }
+    
 }

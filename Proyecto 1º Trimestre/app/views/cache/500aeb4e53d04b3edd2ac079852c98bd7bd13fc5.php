@@ -33,23 +33,23 @@
         </tr>
     </table>
 
-    <select class="form-select" name="estado">
-        <option value="B" <?= (isset($datosTarea["estado"]) ? $datosTarea["estado"] : ValorPost('estado')) == 'B' ? 'selected' : '' ?>>B=Esperando ser aprobada</option>
-        <option value="P" <?= (isset($datosTarea["estado"]) ? $datosTarea["estado"] : ValorPost('estado')) == 'P' ? 'selected' : '' ?>>P=Pendiente</option>
-        <option value="R" <?= (isset($datosTarea["estado"]) ? $datosTarea["estado"] : ValorPost('estado')) == 'R' ? 'selected' : '' ?>>R=Realizada</option>
-        <option value="C" <?= (isset($datosTarea["estado"]) ? $datosTarea["estado"] : ValorPost('estado')) == 'C' ? 'selected' : '' ?>>C=Cancelada</option>
-    </select> <br>
-
     <form action="../controllers/procesarCompletarTarea.php?id=<?= $id ?>" method='post' enctype="multipart/form-data">
+
+        <select class="form-select" name="estado">
+            <option value="B" <?= (isset($datosTarea["estado"]) ? $datosTarea["estado"] : ValorPost('estado')) == 'B' ? 'selected' : '' ?>>B=Esperando ser aprobada</option>
+            <option value="P" <?= (isset($datosTarea["estado"]) ? $datosTarea["estado"] : ValorPost('estado')) == 'P' ? 'selected' : '' ?>>P=Pendiente</option>
+            <option value="R" <?= (isset($datosTarea["estado"]) ? $datosTarea["estado"] : ValorPost('estado')) == 'R' ? 'selected' : '' ?>>R=Realizada</option>
+            <option value="C" <?= (isset($datosTarea["estado"]) ? $datosTarea["estado"] : ValorPost('estado')) == 'C' ? 'selected' : '' ?>>C=Cancelada</option>
+        </select> <br>
 
         <div class="form-group">
             <label for="" class="form-label">Anotaciones anteriores</label>
-            <textarea class="form-control" name="anotaciones_anteriores" rows="2" cols="50"><?= valorPost('anotaciones_ant') ?></textarea><br><br>
+            <textarea class="form-control" name="anotaciones_anteriores" rows="2" cols="50"><?= isset($datosTarea["anotaciones_anteriores"]) ? $datosTarea["anotaciones_anteriores"] : "" ?></textarea><br><br>
         </div>
 
         <div class="form-group">
             <label for="" class="form-label">Anotaciones posteriores</label>
-            <textarea class="form-control" name="anotaciones_posteriores" rows="2" cols="50"><?= valorPost('anotaciones_pos') ?></textarea><br><br>
+            <textarea class="form-control" name="anotaciones_posteriores" rows="2" cols="50"><?= isset($datosTarea["anotaciones_anteriores"]) ? $datosTarea["anotaciones_anteriores"] : "" ?></textarea><br><br>
         </div>
 
         <div class="form-group">

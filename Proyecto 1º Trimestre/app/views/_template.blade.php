@@ -1,16 +1,3 @@
-<!-- 
-LAYOUT DE LA APLICACIÓN 
-ESTA PÁGINA DISPONE DONDE IRÁN LOS DIFERENTES BLOQUES QUE CONFORMAN LA APLICACIÓN
-
-Se centra solamente en la presentación.
-Deberemos indicarle:
-    - titulo
-    - menu
-    - cuerpo
-
-Podría tener tantos parámetros como quisiesemos
-Igualmente nuestra aplicación podría tener tantos layouts como deseasemos
--->
 <!DOCTYPE html>
 <html>
 
@@ -24,19 +11,26 @@ Igualmente nuestra aplicación podría tener tantos layouts como deseasemos
 </head>
 
 <body>
-    <header class="d-flex justify-content-center py-3">
-        <div id="head">
-            Bunglebuild S.L.
-        </div>
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <h1 class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">Bunglebuild S.L.</h1>
+        @yield('usuario')
     </header>
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         @include('menu')
     </nav>
     <main id="cuerpo">
         @yield('cuerpo')
     </main>
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <p>Ghenciu Nicolae Adrian</p>
+    <footer class="py-3 my-4">
+        
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <!--
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Privacy</a></li>
+            -->
+        </ul>
+        <p class="text-center text-muted">© 2022 Ghenciu Nicolae Adrian</p>
     </footer>
 </body>
 
