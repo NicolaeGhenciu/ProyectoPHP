@@ -55,24 +55,12 @@
             <option value="R">R=Realizada</option>
             <option value="C">C=Cancelada</option>
         </select> <br>
-        <label>Fecha de creación de la tarea: </label>
-        <input class="form-control" type="date" name="fecha_creacion" readonly value="<?= $fcha ?>"> <br>
         <label>Operario encargado: </label>
         <?= CreaSelect('operario_encargado', Usuarios::listaParaSelect(), filter_input(INPUT_POST, 'operario_encargado')) ?>
         <br>
         <label>Fecha de realización: </label>
         <input class="form-control" type="date" name="fecha_realizacion" value="<?= ValorPost('fecha_realizacion') ?>">
         <?= VerError('fecha_realizacion') ?> <br>
-        <!--
-        <label>Anotaciones anteriores: </label> <br>
-        <textarea class="form-control" name="anotaciones_anteriores" cols="30" rows="3"></textarea> <br>
-        <label>Anotaciones posteriores: </label> <br>
-        <textarea class="form-control" name="anotaciones_posteriores" cols="30" rows="3"></textarea> <br>
-        <label>Fichero resumen: </label> <br>
-        <input class="form-control" name="fichero_resumen" type="file"> <br>
-        <label>Fotos del trabajo realizado: </label> <br>
-        <input class="form-control" name="foto_trabajo" type="file"> <br>
-        -->
         <button class="btn btn-primary mb-3" type="submit">Enviar</button>
     </form>
     <?php $__env->stopSection(); ?>

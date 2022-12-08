@@ -69,33 +69,9 @@ if (!$_POST) { // Si no han enviado el fomulario
         ]);
     } else {
         $todos_los_campos = $_POST;
+        //$todos_los_campos['fecha_creacion'] = $fcha;
         Tareas::insertarTarea(getContenido($todos_los_campos, true), getContenido($todos_los_campos, false));
         header("location:procesarListaTareas.php");
     }
-
-    //$ultimoId = $bd->getCountTareas()[0] + 1;
-    /*
-    if ($hayError) {
-        include("../views/formulario_tarea.php");
-    } else {
-
-        $todos_los_campos = $_POST;
-
-        if ($_FILES['fichero_resumen']['name'] == "") {
-            $todos_los_campos["fichero_resumen"] = "";
-        } else {
-            subirArchivo('fichero_resumen', $ultimoId);
-            $todos_los_campos["fichero_resumen"] = "Tarea-" . $ultimoId . "-" . $_FILES['fichero_resumen']['name'];
-        }
-
-        if ($_FILES['foto_trabajo']['name'] == "") {
-            $todos_los_campos["foto_trabajo"] = "";
-        } else {
-            subirArchivo('foto_trabajo', $ultimoId);
-            $todos_los_campos["foto_trabajo"] = "Tarea-" . $ultimoId . "-" . $_FILES['foto_trabajo']['name'];
-        }
-        */
-
-    //}
 
 }

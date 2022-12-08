@@ -22,7 +22,7 @@
 
     <span>Página <?= $pagina ?></span>
 
-    <a href="?pagina=<?= ($pagina == $totalPaginas) ? $pagina : $pagina + 1 ?>" class='btn btn-info' role='button'>Sigiente</a>
+    <a href="?pagina=<?= ($pagina == $totalPaginas) ? $pagina : $pagina + 1 ?>" class='btn btn-info' role='button'>Siguente</a>
 
     <a href="?pagina=<?= $totalPaginas ?>" class='btn btn-info' role='button'>Última</a>
 

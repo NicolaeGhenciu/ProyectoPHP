@@ -52,11 +52,11 @@
             <td><?= $datosTarea['fecha_realizacion'] ?></td>
             <td><?= $datosTarea['anotaciones_anteriores'] ?></td>
             <td><?= $datosTarea['anotaciones_posteriores'] ?></td>
-            <td><?= $datosTarea['fichero_resumen'] ?></td>
-            <td><?= $datosTarea['foto_trabajo'] ?></td>
+            <td><?= ($datosTarea['fichero_resumen'] != "") ? "<a class='btn btn-warning' href='/Files/" . $datosTarea['fichero_resumen'] . "' download='" . $datosTarea['fichero_resumen'] . "'>Descargar</a>" : "" ?> </td>
+            <td><?= ($datosTarea['foto_trabajo'] != "") ? "<a class='btn btn-warning' href='/Files/" . $datosTarea['foto_trabajo'] . "' download='" . $datosTarea['foto_trabajo'] . "'>Descargar</a>" : "" ?> </td>
         </tr>
     </table>
-    <a href="..//controllers/procesarlistaTareas.php">Volver atras</a>
+    <a class="btn btn-info" href="..//controllers/procesarlistaTareas.php">Volver atras</a>
     @endsection
 </body>
 
