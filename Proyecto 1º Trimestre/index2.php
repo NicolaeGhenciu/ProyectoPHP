@@ -1,40 +1,37 @@
 <?php
-// Evitamos errores "deprecated" en php 8.1 que tenemos con la versión de jessengers blade
-//error_reporting(E_ERROR | E_WARNING | E_PARSE);
+//La carpeta donde buscaremos los controladores
+define ('CONTROLLERS_FOLDER', "app/controllers/");
 
-// Estamos trabajando con espacios de nombres, hay objetos que queremos simplificar su nombre
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
+//Si no se indica un controlador, este es el controlador que se usará
+define ('DEFAULT_CONTROLLER', "controlador_Tarea");
 
-//
-// URL en la que se encuentra la aplicación. Se precisa para crear los enlaces
-// BASE_URL si utilizáis XAMMP será 
-// http://localhost/carpeta/index.php/
-//
-// Si utilizamos como servidor el interprete de php ejecutando en el terminal
-// php -S localhost:8000
-define('BASE_URL', 'http://localhost:3000/index.php/');
+ //Si no se indica una acción, esta acción es la que se usará
+define ('DEFAULT_ACTION', "login");
 
-require __DIR__ . '/vendor/autoload.php'; // Autocargador para los componentes instalados desde composer (en este caso Slim y blade)
-require __DIR__ . '/ctes.php'; // definimos constantes que facilitan el trabajo
+//Obtenemos el controlador.
+//Si el usuario no lo introduce, seleccionamos el de por defecto.
+$controller = DEFAULT_CONTROLLER;
+if ( !empty ( $_GET[ 'controller' ] ) )
+   $controller = $_GET [ 'controller' ];
 
-//include(MODEL_PATH . '/conx_bd.php');
-include(CTRL_PATH . '/validar_login.php');
+$action = DEFAULT_ACTION;
+// Obtenemos la acción seleccionada.
+// Si el usuario no la introduce, seleccionamos la de por defecto.
+if ( !empty ( $_GET [ 'action' ] ) )
+    $action = $_GET [ 'action' ];
 
-// Habilitamos errores detallados para que nos informe de cualquier contratiempo
-// https://www.slimframework.com/docs/v3/handlers/error.html
-/**
- * Instantiate App
- * Creamos la aplicación
- */
+//Ya tenemos el controlador y la accion
+//Formamos el nombre del fichero que contiene nuestro controlador
+$controller = CONTROLLERS_FOLDER . $controller . '.php';
 
-$app = new \Slim\App(['settings' => ['displayErrorDetails' => true,],]);
+//Si la variable ($controller) es un fichero lo requerimos
+if ( is_file ( $controller ) )
+   require_once ($controller);
+else
+   die ('El controlador no existe - 404 not found');
 
-// Página de login (observad que entramos por get/post/put/... al poner any())
-$app->any('login', function (Request $request, Response $response, $args) {
-
-});
-
-$app->get('/listaTareasPendientes', function (Request $request, Response $response, $args) {
-
-});
+//Si la variable $action es una función la ejecutamos o detenemos el script
+if ( is_callable ($action) )
+   $action();
+else
+   die ('La accion no existe - 404 not found');

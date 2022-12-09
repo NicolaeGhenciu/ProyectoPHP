@@ -95,6 +95,20 @@ class conx_basedatos
         return $numFilas;
     }
 
+    public function numFilasFiltrado($condicion)
+    {
+
+        $sql = "SELECT * FROM tareas " . $condicion;
+        echo $sql;
+
+        $resultado = $this->pdo->prepare($sql);
+        $resultado->execute();
+
+        $numFilas = $resultado->rowCount();
+
+        return $numFilas;
+    }
+
     public function resultadosPorPagina($tareas, $empezarDesde, $tamanioPagina)
     {
 
@@ -168,10 +182,25 @@ class conx_basedatos
 
         $cadena = substr($cadena, 0, -1);
 
-        $sql = "UPDATE tareas SET " . $cadena ." WHERE id = $idt";
+        $sql = "UPDATE tareas SET " . $cadena . " WHERE id = $idt";
 
         $resultado = $this->pdo->prepare($sql);
         $resultado->execute(array());
-    
+    }
+
+    function buscarTarea($consulta)
+    {
+
+        $queryLimite = "SELECT id,nif_cif,nombre,apellidos,telefono,descripcion,email,direccion,poblacion,
+        codigo_postal,provincias,estado,DATE_FORMAT(fecha_creacion, '%d/%m/%Y') AS fecha_creacion ,operario_encargado, DATE_FORMAT(fecha_realizacion, '%d/%m/%Y') AS fecha_realizacion,
+        anotaciones_anteriores,anotaciones_posteriores,fichero_resumen,foto_trabajo FROM `tareas` " . $consulta;
+
+        $resultado = $this->pdo->prepare($queryLimite);
+        $resultado->execute();
+
+        //Almacenamos el resultado de fetchAll en una variable/
+        $datos = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        return $datos;
     }
 }

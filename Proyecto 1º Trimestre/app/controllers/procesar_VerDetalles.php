@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include("../models/Tareas.php");
 include("../models/conx_bd.php");
 include("../libreria/creaTable.php");

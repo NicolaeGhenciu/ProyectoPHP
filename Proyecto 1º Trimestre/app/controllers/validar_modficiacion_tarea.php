@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include("../models/conx_bd.php");
 include("../controllers/varios.php");
 include("../libreria/creaSelect.php");

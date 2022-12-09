@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<head>
+    <title>Completar Tarea</title>
+    <link rel="stylesheet" href="../../Assets/css/formulario.css">
+</head>
+
 <body>
 
     
@@ -42,29 +47,21 @@
             <option value="C" <?= (isset($datosTarea["estado"]) ? $datosTarea["estado"] : ValorPost('estado')) == 'C' ? 'selected' : '' ?>>C=Cancelada</option>
         </select> <br>
 
-        <div class="form-group">
-            <label for="" class="form-label">Anotaciones anteriores</label>
-            <textarea class="form-control" name="anotaciones_anteriores" rows="2" cols="50"><?= isset($datosTarea["anotaciones_anteriores"]) ? $datosTarea["anotaciones_anteriores"] : "" ?></textarea><br><br>
-        </div>
+        <label for="" class="form-label">Anotaciones anteriores</label>
+        <textarea class="form-control" name="anotaciones_anteriores" rows="2" cols="50"><?= isset($datosTarea["anotaciones_anteriores"]) ? $datosTarea["anotaciones_anteriores"] : "" ?></textarea><br><br>
 
-        <div class="form-group">
-            <label for="" class="form-label">Anotaciones posteriores</label>
-            <textarea class="form-control" name="anotaciones_posteriores" rows="2" cols="50"><?= isset($datosTarea["anotaciones_anteriores"]) ? $datosTarea["anotaciones_anteriores"] : "" ?></textarea><br><br>
-        </div>
+        <label for="" class="form-label">Anotaciones posteriores</label>
+        <textarea class="form-control" name="anotaciones_posteriores" rows="2" cols="50"><?= isset($datosTarea["anotaciones_anteriores"]) ? $datosTarea["anotaciones_anteriores"] : "" ?></textarea><br><br>
 
-        <div class="form-group">
-            <label for="" class="form-label">Subir archivo</label>
-            <input class="form-control" type="file" name="fichero_resumen"><br><br>
-        </div>
 
-        <div class="form-group">
-            <label for="" class="form-label">Subir fotos</label>
-            <input class="form-control" type="file" name="foto_trabajo"><br><br>
-        </div>
+        <label for="" class="form-label">Subir archivo</label>
+        <input class="form-control" type="file" name="fichero_resumen"><br><br>
 
-        <div class="form-group">
-            <button class="btn btn-primary">Completar tarea</button>
-        </div>
+        <label for="" class="form-label">Subir fotos</label>
+        <input class="form-control" type="file" name="foto_trabajo"><br><br>
+
+        <button class="btn btn-success">Completar tarea</button>
+
 
     </form>
 

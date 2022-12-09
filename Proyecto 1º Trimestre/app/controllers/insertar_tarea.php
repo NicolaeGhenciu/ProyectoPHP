@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include("varios.php");
 include("utilsforms.php");
 include("../libreria/creaSelect.php");

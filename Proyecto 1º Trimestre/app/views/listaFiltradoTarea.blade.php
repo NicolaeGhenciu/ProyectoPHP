@@ -6,10 +6,10 @@
 </head>
 
 <body>
-    
-    <?php $__env->startSection('cuerpo'); ?>
+    @extends('_template')
+    @section('cuerpo')
 
-    <?= creaTable('listaTareasPendientes', $nombreCampos, $tareas) ?>
+    <?= creaTable('tareasfiltrado', $nombreCampos, $tareas) ?>
 
     <a href="?pagina=1" class="btn btn-dark" role='button'>Primera</a>
 
@@ -25,7 +25,7 @@
 
     <br> <br>
 
-    <form action="../controllers/procesarlistaTareasPendientes.php" method="get">
+    <form action="/app/controllers/procesarFormularioFiltrado.php" method="get">
         <div class="input-group mb-3">
             <div id="input_container"><input type="text" name="numPag" class="form-control"></div>
             <div class="input-group-append">
@@ -33,8 +33,7 @@
             </div>
         </div>
     </form>
-    <?php $__env->stopSection(); ?>
+    @endsection
 </body>
 
 </html>
-<?php echo $__env->make('_template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\PHP\Proyecto 1º Trimestre\app\views/listaTareasPendientes.blade.php ENDPATH**/ ?>

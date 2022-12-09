@@ -1,4 +1,13 @@
 <?php
+
+/**
+ * getContenido
+ *
+ * @param  mixed $todos_los_campos
+ * @param  mixed $valor
+ * @return void
+ */
+
 function getContenido($todos_los_campos, $valor)
 {
     $contenido = "";

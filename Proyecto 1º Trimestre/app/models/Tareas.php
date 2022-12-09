@@ -23,6 +23,12 @@ class Tareas
         return conx_basedatos::getInstance()->numFilas('tareas');
     }
 
+    static function getNumeroTareasFiltrado($condicion)
+    {
+
+        return conx_basedatos::getInstance()->numFilasFiltrado($condicion);
+    }
+
     static function getNumeroTareasPendientes()
     {
 
@@ -55,4 +61,10 @@ class Tareas
     {
         return conx_basedatos::getInstance()->updateTareas($names, $campos, $id);
     }
+
+    static function buscarTarea($consulta)
+    {
+        return conx_basedatos::getInstance()->buscarTarea($consulta);
+    }
+
 }

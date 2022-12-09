@@ -1,15 +1,16 @@
 <?php
+session_start();
 include(__DIR__ . '/varios.php');
 include('../models/Tareas.php');
 include('../models/conx_bd.php');
 include('../libreria/creaTable.php');
 
 $nombreCampos = [
-    'id', 'nif_cif', 'nombre', 'apellidos', 'descripcion', 'poblacion',
+    'id', 'nif_cif', 'nombre', 'descripcion', 'poblacion',
     'estado', 'fecha_creacion', 'operario_encargado', 'fecha_realizacion',
 ];
 
-$tamanioPagina = 10;
+$tamanioPagina = 8;
 
 /**
  * Comprobar si se ha enviado por parametro el valor de la página a mostrar
@@ -42,8 +43,6 @@ if (isset($_GET['numPag'])) {
 }
 
 $empezarDesde = ($pagina - 1) * $tamanioPagina;
-
-//$registro = Tareas::getTareasPorPagina($empezarDesde, $tamanioPagina);
 
 $listaValores = [];
 

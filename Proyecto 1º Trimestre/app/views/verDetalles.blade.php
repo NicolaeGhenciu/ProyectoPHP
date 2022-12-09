@@ -2,57 +2,91 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ver Detalles</title>
 </head>
 
 <body>
     @extends('_template')
 
     @section('cuerpo')
+
+    <h2>Detalles</h2>
+
     <table class="table table-bordered">
         <tr>
             <th>ID</th>
-            <th>NIF/CIF</th>
-            <th>Nombre</th>
-            <th>Apellidos</th>
-            <th>Teléfono</th>
-            <th>Descripción</th>
-            <th>Email</th>
-            <th>Dirección</th>
-            <th>Población</th>
-            <th>Código Postal</th>
-            <th>Provincias</th>
-            <th>Estado</th>
-            <th>Fecha de Creacion</th>
-            <th>Operario Encargado</th>
-            <th>Fecha de Realizacion</th>
-            <th>Anotaciones Anteriores</th>
-            <th>Anotaciones Posteriores</th>
-            <th>Fichero Resumen</th>
-            <th>Foto Trabajo</th>
+            <td><?= $datosTarea['id'] ?></td>
         </tr>
         <tr>
-            <td><?= $datosTarea['id'] ?></td>
+            <th>NIF/CIF</th>
             <td><?= $datosTarea['nif_cif'] ?></td>
+        </tr>
+        <tr>
+            <th>Nombre</th>
             <td><?= $datosTarea['nombre'] ?></td>
+        </tr>
+        <tr>
+            <th>Apellidos</th>
             <td><?= $datosTarea['apellidos'] ?></td>
+        </tr>
+        <tr>
+            <th>Teléfono</th>
             <td><?= $datosTarea['telefono'] ?></td>
+        </tr>
+        <tr>
+            <th>Descripción</th>
             <td><?= $datosTarea['descripcion'] ?></td>
+        </tr>
+        <tr>
+            <th>Email</th>
             <td><?= $datosTarea['email'] ?></td>
+        </tr>
+        <tr>
+            <th>Dirección</th>
             <td><?= $datosTarea['direccion'] ?></td>
+        </tr>
+        <tr>
+            <th>Población</th>
             <td><?= $datosTarea['poblacion'] ?></td>
+        </tr>
+        <tr>
+            <th>Código Postal</th>
             <td><?= $datosTarea['codigo_postal'] ?></td>
+        </tr>
+        <tr>
+            <th>Provincias</th>
             <td><?= $datosTarea['provincias'] ?></td>
+        </tr>
+        <tr>
+            <th>Estado</th>
             <td><?= $datosTarea['estado'] ?></td>
+        </tr>
+        <tr>
+            <th>Fecha de Creacion</th>
             <td><?= $datosTarea['fecha_creacion'] ?></td>
+        </tr>
+        <tr>
+            <th>Operario Encargado</th>
             <td><?= $datosTarea['operario_encargado'] ?></td>
+        </tr>
+        <tr>
+            <th>Fecha de Realizacion</th>
             <td><?= $datosTarea['fecha_realizacion'] ?></td>
+        </tr>
+        <tr>
+            <th>Anotaciones Anteriores</th>
             <td><?= $datosTarea['anotaciones_anteriores'] ?></td>
+        </tr>
+        <tr>
+            <th>Anotaciones Posteriores</th>
             <td><?= $datosTarea['anotaciones_posteriores'] ?></td>
+        </tr>
+        <tr>
+            <th>Fichero Resumen</th>
             <td><?= ($datosTarea['fichero_resumen'] != "") ? "<a class='btn btn-warning' href='/Files/" . $datosTarea['fichero_resumen'] . "' download='" . $datosTarea['fichero_resumen'] . "'>Descargar</a>" : "" ?> </td>
+        </tr>
+        <tr>
+            <th>Foto Trabajo</th>
             <td><?= ($datosTarea['foto_trabajo'] != "") ? "<a class='btn btn-warning' href='/Files/" . $datosTarea['foto_trabajo'] . "' download='" . $datosTarea['foto_trabajo'] . "'>Descargar</a>" : "" ?> </td>
         </tr>
     </table>
