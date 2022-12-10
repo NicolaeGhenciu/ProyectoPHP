@@ -66,6 +66,8 @@
         <input class="form-control" name="foto_trabajo" type="file"> <br>
         <button class="btn btn-primary mb-3" type="submit">Enviar</button>
     </form>
+    <br>
+    <a class="btn btn-info" href="/app/controllers/procesarlistaTareas.php">Volver atras</a>
     @endsection
 </body>
 

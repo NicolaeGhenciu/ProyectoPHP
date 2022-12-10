@@ -9,7 +9,7 @@
 <body>
     @extends('_template')
     @section('cuerpo')
-    <h1>Flitrando</h1>
+    <h1>Filtrando</h1>
     <form action="/app/controllers/procesarFormularioFiltrado.php" method="post">
 
         <table class="table table-bordered">

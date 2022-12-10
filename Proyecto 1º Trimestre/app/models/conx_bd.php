@@ -125,6 +125,20 @@ class conx_basedatos
         return $datos;
     }
 
+    public function resultadosPorPaginaUsuario($tareas, $empezarDesde, $tamanioPagina)
+    {
+
+        $queryLimite = "SELECT nif,nombre,clave,correo,telefono,es_admin FROM $tareas LIMIT " . $empezarDesde . "," . $tamanioPagina;
+
+        $resultado = $this->pdo->prepare($queryLimite);
+        $resultado->execute();
+
+        //Almacenamos el resultado de fetchAll en una variable/
+        $datos = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        return $datos;
+    }
+
     public function resultadosPorPaginaPendietes($tareas, $empezarDesde, $tamanioPagina)
     {
 
@@ -153,22 +167,24 @@ class conx_basedatos
         return $stmt->fetch();
     }
 
-    function borrarTarea($idt)
+    function borrarFila($tabla,$nombreCampo,$idt)
     {
 
-        $sql = "DELETE FROM tareas WHERE id = $idt";
+        $sql = "DELETE FROM $tabla WHERE $nombreCampo = $idt";
+
+        echo $sql;
 
         $resultado = $this->pdo->prepare($sql);
         $resultado->execute();
     }
 
-    function getTarea($idt)
+    function getFila($tabla,$nombreCampo,$idt)
     {
-        $stmt = $this->pdo->query("SELECT * FROM tareas WHERE id = $idt");
+        $stmt = $this->pdo->query("SELECT * FROM $tabla WHERE $nombreCampo = $idt");
         return $stmt->fetch();
     }
 
-    function updateTareas($nombres, $campos, $idt)
+    function update($tabla,$pk,$nombres, $campos, $idt)
     {
 
         $cadena = '';
@@ -182,7 +198,9 @@ class conx_basedatos
 
         $cadena = substr($cadena, 0, -1);
 
-        $sql = "UPDATE tareas SET " . $cadena . " WHERE id = $idt";
+        $sql = "UPDATE $tabla SET " . $cadena . " WHERE $pk = $idt";
+
+        echo $sql;
 
         $resultado = $this->pdo->prepare($sql);
         $resultado->execute(array());

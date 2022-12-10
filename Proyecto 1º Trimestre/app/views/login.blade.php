@@ -14,8 +14,8 @@
 
 <body>
     <form action="/app/controllers/validar_login.php" method="post">
-        <section class="vh-80 gradient-custom">
-            <div class="container py-5 h-100">
+        <section class="vh-500 gradient-custom">
+            <div class="container py-5 h-50">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                         <div class="card bg-dark text-white" style="border-radius: 1rem;">
@@ -23,8 +23,8 @@
 
                                 <div class="mb-md-5 mt-md-4 pb-5">
 
-                                    <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                                    <p class="text-white-50 mb-5">Please enter your login and password!</p>
+                                    <h2 class="fw-bold mb-2 text-uppercase">¡Bienvenido!</h2>
+                                    <p class="text-white-50 mb-5">Bunglebuild S.L.</p>
 
                                     <div class="form-outline form-white mb-4">
                                         <input type="text" name="email" class="form-control form-control-lg" />
@@ -33,7 +33,7 @@
 
                                     <div class="form-outline form-white mb-4">
                                         <input type="password" name="pass" class="form-control form-control-lg" />
-                                        <label class="form-label" for="typePasswordX">Password</label>
+                                        <label class="form-label" for="typePasswordX">Contraseña</label>
                                     </div>
                                     <!-- <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>-->
 
@@ -42,8 +42,8 @@
                                 </div>
 
                                 <div>
-                                    <!--<p class="mb-0">Don't have an account? <a href="#!" class="text-white-50 fw-bold">Sign Up</a>
-                                    </p>-->
+                                    <p class="mb-0">No tienes cuenta? <a href="#!" class="text-white-50 fw-bold">Sign Up</a>
+                                    </p>
                                 </div>
 
                             </div>

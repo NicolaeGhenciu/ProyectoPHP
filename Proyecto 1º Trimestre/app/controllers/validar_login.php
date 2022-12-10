@@ -23,13 +23,13 @@ if (!$_POST) { // Si no han enviado el fomulario
 
         $_SESSION['fecha'] = $fechaHora;
         $_SESSION['nombre'] = $usuario['nombre'];
+        $_SESSION['nif'] = $usuario['nif'];
 
         if ($usuario['es_admin'] == 1) {
             $_SESSION['rol'] = "Administrador";
         } else {
             $_SESSION['rol'] = "Operario";
         }
-
 
         echo $blade->render('nada', [
             'usuario' => $usuario['nombre'],

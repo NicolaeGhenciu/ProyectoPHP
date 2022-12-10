@@ -9,7 +9,7 @@
     @extends('_template')
     @section('cuerpo')
 
-    <?= creaTable('listaTareasPendientes', $nombreCampos, $tareas, "id") ?>
+    <?= creaTable('listaUsuarios', $nombreCampos, $tareas,'nif',) ?>
 
     <a href="?pagina=1" class="btn btn-dark" role='button'>Primera</a>
 
@@ -25,7 +25,7 @@
 
     <br> <br>
 
-    <form action="../controllers/procesarlistaTareasPendientes.php" method="get">
+    <form action="/app/controllers/procesarlistaUsuarios.php" method="get">
         <div class="input-group mb-3">
             <div id="input_container"><input type="text" name="numPag" class="form-control"></div>
             <div class="input-group-append">
@@ -33,6 +33,7 @@
             </div>
         </div>
     </form>
+
     @endsection
 </body>
 

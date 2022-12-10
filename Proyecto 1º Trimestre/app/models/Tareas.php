@@ -49,17 +49,17 @@ class Tareas
 
     static function borrarTarea($id)
     {
-        return conx_basedatos::getInstance()->borrarTarea($id);
+        return conx_basedatos::getInstance()->borrarFila('tareas','id',$id);
     }
 
     static function getdatosTarea($id)
     {
-        return conx_basedatos::getInstance()->getTarea($id);
+        return conx_basedatos::getInstance()->getFila('tareas','id',$id);
     }
 
     static function updateTareas($names, $campos, $id)
     {
-        return conx_basedatos::getInstance()->updateTareas($names, $campos, $id);
+        return conx_basedatos::getInstance()->update("tareas","id",$names, $campos, $id);
     }
 
     static function buscarTarea($consulta)

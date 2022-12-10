@@ -9,7 +9,7 @@
     
     <?php $__env->startSection('cuerpo'); ?>
 
-    <?= creaTable('tareasfiltrado', $nombreCampos, $tareas) ?>
+    <?= creaTable('tareasfiltrado', $nombreCampos, $tareas, "id") ?>
 
     <a href="?pagina=1" class="btn btn-dark" role='button'>Primera</a>
 
