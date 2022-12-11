@@ -42,7 +42,7 @@
                                 </div>
 
                                 <div>
-                                    <p class="mb-0">No tienes cuenta? <a href="#!" class="text-white-50 fw-bold">Sign Up</a>
+                                    <p class="mb-0">No tienes cuenta?<a href="#!" class="text-white-50 fw-bold"></a>
                                     </p>
                                 </div>
 

@@ -1,30 +1,47 @@
 <?php
 session_start();
-    include("utilsforms.php");
-    include("../libreria/subirArchivos.php");
-    include("../models/Tareas.php");
-    include("../libreria/getContenido.php");
-    include("../models/conx_bd.php");
-    include("../controllers/varios.php");
-    
-     /**
-     *  Si no han enviado el fomulario
-     */
+include("utilsforms.php");
+include("../libreria/subirArchivos.php");
+include("../libreria/validarString.php");
+include("../models/Tareas.php");
+include("../libreria/getContenido.php");
+include("../models/conx_bd.php");
+include("../controllers/varios.php");
 
-    if (!$_POST) {
+/**
+ *  Si no han enviado el fomulario
+ */
+
+$hayError = FALSE;
+$errores = [];
+
+if (!$_POST) {
+
+    $id = $_GET['id'];
+    $datosTarea = Tareas::getdatosTarea($id);
+    echo $blade->render('formularioCompletarTarea', [
+        'id' => $id,
+        'datosTarea' => $datosTarea
+    ]);
+} else {
+
+    if (!validarStringyNumber($_POST["anotaciones_anteriores"])) {
+        $errores['anotaciones_anteriores'] = 'Formato incorrecto o se encuentra vacio';
+        $hayError = TRUE;
+    }
+    if (!validarStringyNumber($_POST["anotaciones_posteriores"])) {
+        $errores['anotaciones_posteriores'] = 'Formato incorrecto o se encuentra vacio';
+        $hayError = TRUE;
+    }
+
+    if ($hayError) {
         $id = $_GET['id'];
         $datosTarea = Tareas::getdatosTarea($id);
         echo $blade->render('formularioCompletarTarea', [
             'id' => $id,
             'datosTarea' => $datosTarea
         ]);
-
-    /**
-     *  Si han enviado el fomulario
-     */
-
     } else {
-        
         $todos_los_campos = $_POST;
 
         $id = $_GET['id'];
@@ -46,5 +63,5 @@ session_start();
         Tareas::updateTareas(getContenido($todos_los_campos, true), getContenido($todos_los_campos, false), $id);
 
         header("location:procesarListaTareas.php");
-    
     }
+}

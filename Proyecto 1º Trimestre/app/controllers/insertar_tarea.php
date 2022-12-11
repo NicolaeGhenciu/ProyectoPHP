@@ -11,6 +11,7 @@ include("../models/Usuarios.php");
 include("../models/Tareas.php");
 
 include("../libreria/validarCodigoPostal.php");
+include("../libreria/validarString.php");
 include("../libreria/validarDni.php");
 include("../libreria/validarCIF.php");
 include("../libreria/validarEmail.php");
@@ -24,21 +25,23 @@ $hayError = FALSE;
 $errores = [];
 $fcha = date("Y-m-d");
 
+if ($_SESSION['rol'] == "Administrador") {
+
 if (!$_POST) { // Si no han enviado el fomulario
     echo $blade->render('formulario_tarea', [
         'fcha' => $fcha,
     ]);
 } else {
 
-    if (empty($_POST["nombre"])) {
+    if (empty($_POST["nombre"]) || !validarString($_POST["nombre"])) {
         $errores['nombre'] = 'Campo nombre se encuentra vacio';
         $hayError = TRUE;
     }
-    if (empty($_POST["apellidos"])) {
+    if (empty($_POST["apellidos"]) || !validarString($_POST["apellidos"])) {
         $errores['apellidos'] = 'Campo apellidos se encuentra vacio';
         $hayError = TRUE;
     }
-    if (empty($_POST["descripcion"])) {
+    if (empty($_POST["descripcion"]) || !validarStringyNumber($_POST["descripcion"])) {
         $errores['descripcion'] = 'Campo descripción se encuentra vacio';
         $hayError = TRUE;
     }
@@ -62,6 +65,14 @@ if (!$_POST) { // Si no han enviado el fomulario
         $errores['fecha_realizacion'] = 'Campo fecha de realización se encuentra vacio o no es valido, la fecha tiene que ser posterior a la de hoy';
         $hayError = TRUE;
     }
+    if (!validarStringyNumber($_POST["direccion"])) {
+        $errores['direccion'] = 'Formato incorrecto o se encuentra vacio';
+        $hayError = TRUE;
+    }
+    if (!validarStringyNumber($_POST["poblacion"])) {
+        $errores['poblacion'] = 'Formato incorrecto o se encuentra vacio';
+        $hayError = TRUE;
+    }
 
     if ($hayError) {
         echo $blade->render('formulario_tarea', [
@@ -74,4 +85,5 @@ if (!$_POST) { // Si no han enviado el fomulario
         header("location:procesarListaTareas.php");
     }
 
+}
 }

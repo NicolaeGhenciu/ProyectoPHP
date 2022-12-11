@@ -32,9 +32,11 @@
         <input class="form-control" type="text" name="email" value="<?= ValorPost('email') ?>">
         <?= VerError('email') ?> <br>
         <label>Dirección: </label>
-        <input class="form-control" type="text" name="direccion"> <br>
+        <input class="form-control" type="text" name="direccion" value="<?= ValorPost('direccion') ?>"> <br>
+        <?= VerError('direccion') ?> <br>
         <label>Población: </label>
-        <input class="form-control" type="text" name="poblacion"> <br>
+        <input class="form-control" type="text" name="poblacion" value="<?= ValorPost('poblacion') ?>"> <br>
+        <?= VerError('poblacion') ?> <br>
         <label>Codigo Postal: </label>
         <input class="form-control" type="text" name="codigo_postal" value="<?= ValorPost('codigo_postal') ?>">
         <?= VerError('codigo_postal') ?> <br>

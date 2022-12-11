@@ -2,6 +2,8 @@
 session_start();
 include("varios.php");
 
+if ($_SESSION['rol'] == "Administrador") {
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
@@ -16,4 +18,5 @@ if (isset($_GET['nif'])) {
     echo $blade->render('mensajeBorrarUsuario', [
         'nif' => $nif,
     ]);
+}
 }

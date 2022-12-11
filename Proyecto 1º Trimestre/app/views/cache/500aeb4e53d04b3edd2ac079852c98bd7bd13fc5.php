@@ -48,12 +48,13 @@
         </select> <br>
 
         <label for="" class="form-label">Anotaciones anteriores</label>
-        <textarea class="form-control" name="anotaciones_anteriores" rows="2" cols="50"><?= isset($datosTarea["anotaciones_anteriores"]) ? $datosTarea["anotaciones_anteriores"] : "" ?></textarea><br><br>
-
+        <textarea class="form-control" name="anotaciones_anteriores" rows="2" cols="50"><?= isset($datosTarea["anotaciones_anteriores"]) ? $datosTarea["anotaciones_anteriores"] : "" ?></textarea>
+        <?= VerError('anotaciones_anteriores') ?>
+        <br><br>
         <label for="" class="form-label">Anotaciones posteriores</label>
-        <textarea class="form-control" name="anotaciones_posteriores" rows="2" cols="50"><?= isset($datosTarea["anotaciones_anteriores"]) ? $datosTarea["anotaciones_anteriores"] : "" ?></textarea><br><br>
-
-
+        <textarea class="form-control" name="anotaciones_posteriores" rows="2" cols="50"><?= isset($datosTarea["anotaciones_posteriores"]) ? $datosTarea["anotaciones_posteriores"] : "" ?></textarea>
+        <?= VerError('anotaciones_posteriores') ?>
+        <br><br>
         <label for="" class="form-label">Subir archivo</label>
         <input class="form-control" type="file" name="fichero_resumen"><br><br>
 

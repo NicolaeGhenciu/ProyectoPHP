@@ -28,7 +28,7 @@
             <td><?= $datosUsuario['telefono'] ?></td>
         </tr>
     </table>
-
+ 
     <h3>Modificaciones</h3>
     <form action='/app/controllers/procesarModificarUsuario.php?nif=<?= $nif ?>' method="post" enctype="multipart/form-data">
 
@@ -42,7 +42,7 @@
 
         <button class="btn btn-primary mb-3" type="submit">Enviar</button>
     </form>
-    <a class="btn btn-info" href="/app/controllers/procesarlistaUsuarios.php">Volver atras</a>
+    <a class="btn btn-info" href="/app/controllers/procesarlistaUsuarios.php"><i class="fa-solid fa-arrow-turn-down-left"></i>Volver atras</a>
     @endsection
 </body>
 

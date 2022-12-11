@@ -5,7 +5,7 @@ include("../models/Tareas.php");
 include("../models/Usuarios.php");
 include("../models/conx_bd.php");
 
-
+if ($_SESSION['rol'] == "Administrador") {
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -19,4 +19,5 @@ if (isset($_GET['nif'])) {
     $nif = "'" . $_GET['nif'] . "'";
     Usuarios::borrarUsuario($nif);
     header("location:procesarListaUsuarios.php");
+}
 }

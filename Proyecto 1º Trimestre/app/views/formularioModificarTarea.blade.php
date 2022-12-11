@@ -33,8 +33,10 @@
         <?= VerError('email') ?> <br>
         <label>Dirección: </label>
         <input class="form-control" type="text" name="direccion" value="<?= isset($datosTarea["direccion"]) ? $datosTarea["direccion"] : ValorPost('direccion') ?>"> <br>
+        <?= VerError('direccion') ?> <br>
         <label>Población: </label>
         <input class="form-control" type="text" name="poblacion" value="<?= isset($datosTarea["poblacion"]) ? $datosTarea["poblacion"] : ValorPost('poblacion') ?>"> <br>
+        <?= VerError('poblacion') ?> <br>
         <label>Codigo Postal: </label>
         <input class="form-control" type="text" name="codigo_postal" value="<?= isset($datosTarea["codigo_postal"]) ? $datosTarea["codigo_postal"] : ValorPost('codigo_postal') ?>">
         <?= VerError('codigo_postal') ?> <br>
@@ -58,8 +60,10 @@
         <br>
         <label>Anotaciones anteriores: </label> <br>
         <textarea class="form-control" name="anotaciones_anteriores" cols="30" rows="3"><?= isset($datosTarea["anotaciones_anteriores"]) ? $datosTarea["anotaciones_anteriores"] : ValorPost('anotaciones_anteriores') ?></textarea> <br>
+        <?= VerError('anotaciones_anteriores') ?> <br>
         <label>Anotaciones posteriores: </label> <br>
         <textarea class="form-control" name="anotaciones_posteriores" cols="30" rows="3"><?= isset($datosTarea["anotaciones_posteriores"]) ? $datosTarea["anotaciones_posteriores"] : ValorPost('anotaciones_posteriores') ?></textarea> <br>
+        <?= VerError('anotaciones_posteriores') ?> <br>
         <label>Fichero resumen: </label> <br>
         <input class="form-control" name="fichero_resumen" type="file" value=""> <br>
         <label>Fotos del trabajo realizado: </label> <br>
