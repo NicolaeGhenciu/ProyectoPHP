@@ -15,6 +15,8 @@ session_start();
 $hayError = FALSE;
 $errores = [];
 
+
+
 if ($_SESSION['rol'] == "Administrador" || $_SESSION['nif'] == $_GET['nif']) { //comprobamos si el usuario es administrador
 
     if (!$_POST) { // Si no han enviado el fomulario

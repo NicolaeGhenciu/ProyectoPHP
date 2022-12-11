@@ -10,10 +10,13 @@ include(__DIR__ . "/../libreria/getContenido.php");
 
 session_start();
 
-$id = $_GET["id"]; //recogemos la id
+if ($_SESSION['rol'] == "Administrador" && $_SESSION['rol'] == "Operario") {
 
-$datosTarea = Tareas::getdatosTarea($id); // con la id cogemos todos los datos de la tarea
+    $id = $_GET["id"]; //recogemos la id
 
-echo $blade->render('verDetalles', [ //renderizamos y enviamos todos los datos de la tarea a la vista
-    'datosTarea' => $datosTarea,
-]);
+    $datosTarea = Tareas::getdatosTarea($id); // con la id cogemos todos los datos de la tarea
+
+    echo $blade->render('verDetalles', [ //renderizamos y enviamos todos los datos de la tarea a la vista
+        'datosTarea' => $datosTarea,
+    ]);
+}

@@ -10,45 +10,47 @@ include(__DIR__ . "/../libreria/creaTable.php");
 
 session_start();
 
-//if (!isset($_GET['pagina'])) {
+if ($_SESSION['rol'] == "Administrador" && $_SESSION['rol'] == "Operario") {
 
-if (!$_POST) { // Si no han enviado el fomulario
+    //if (!isset($_GET['pagina'])) {
 
-    echo $blade->render('formularioFiltrado'); //renderizamos el formulario de filtrado
+    if (!$_POST) { // Si no han enviado el fomulario
 
-} else {
+        echo $blade->render('formularioFiltrado'); //renderizamos el formulario de filtrado
 
-    $todos_los_datos = $_POST; //recogemos todos los datos
+    } else {
 
-    //vamos a comprobar si el valor1 esta vacio, en el caso de estarlo vamos a sumarle el campo el criterio y el valor a la consulta
-    // luego vamos a comprobar si el valor 2 y el 3 estan vacios para añadirle un and y hacemos lo mismo en los ifs de abajo.
-    // esto nos dara el where para la bbdd
+        $todos_los_datos = $_POST; //recogemos todos los datos
 
-    $consulta = "";
+        //vamos a comprobar si el valor1 esta vacio, en el caso de estarlo vamos a sumarle el campo el criterio y el valor a la consulta
+        // luego vamos a comprobar si el valor 2 y el 3 estan vacios para añadirle un and y hacemos lo mismo en los ifs de abajo.
+        // esto nos dara el where para la bbdd
 
-    if (!empty($todos_los_datos["valor1"]) || !empty($todos_los_datos["valor2"]) || !empty($todos_los_datos["valor3"])) {
-        $consulta = " WHERE ";
-    }
+        $consulta = "";
 
-    if (!empty($todos_los_datos["valor1"])) {
-        $consulta .= $todos_los_datos["campo1"] . $todos_los_datos["criterio1"] . "'" . $todos_los_datos["valor1"] . "'";
-        if (!empty($todos_los_datos["valor2"]) || !empty($todos_los_datos["valor3"])) {
-            $consulta .= " AND ";
+        if (!empty($todos_los_datos["valor1"]) || !empty($todos_los_datos["valor2"]) || !empty($todos_los_datos["valor3"])) {
+            $consulta = " WHERE ";
         }
-    }
-    if (!empty($todos_los_datos["valor2"])) {
-        $consulta .= $todos_los_datos["campo2"] . $todos_los_datos["criterio2"] . "'" . $todos_los_datos["valor2"] . "'";
+
+        if (!empty($todos_los_datos["valor1"])) {
+            $consulta .= $todos_los_datos["campo1"] . $todos_los_datos["criterio1"] . "'" . $todos_los_datos["valor1"] . "'";
+            if (!empty($todos_los_datos["valor2"]) || !empty($todos_los_datos["valor3"])) {
+                $consulta .= " AND ";
+            }
+        }
+        if (!empty($todos_los_datos["valor2"])) {
+            $consulta .= $todos_los_datos["campo2"] . $todos_los_datos["criterio2"] . "'" . $todos_los_datos["valor2"] . "'";
+            if (!empty($todos_los_datos["valor3"])) {
+                $consulta .= " AND ";
+            }
+        }
         if (!empty($todos_los_datos["valor3"])) {
-            $consulta .= " AND ";
+            $consulta .= $todos_los_datos["campo3"] . $todos_los_datos["criterio3"] . "'" . $todos_los_datos["valor3"] . "'";
         }
-    }
-    if (!empty($todos_los_datos["valor3"])) {
-        $consulta .= $todos_los_datos["campo3"] . $todos_los_datos["criterio3"] . "'" . $todos_los_datos["valor3"] . "'";
-    }
 
 
-    //____________paginacion
-    /*
+        //____________paginacion
+        /*
 
         $nombreCampos = [
             'id', 'nif_cif', 'nombre', 'descripcion', 'poblacion',
@@ -105,21 +107,22 @@ if (!$_POST) { // Si no han enviado el fomulario
         ]);
         
         */
-    //_______________________ aqui acaba el intento de paginacion
+        //_______________________ aqui acaba el intento de paginacion
 
-    $nombreCampos = [
-        'id', 'nif_cif', 'nombre', 'descripcion', 'poblacion',
-        'estado', 'fecha_creacion', 'operario_encargado', 'fecha_realizacion',
-    ]; //nombre de los campos
+        $nombreCampos = [
+            'id', 'nif_cif', 'nombre', 'descripcion', 'poblacion',
+            'estado', 'fecha_creacion', 'operario_encargado', 'fecha_realizacion',
+        ]; //nombre de los campos
 
-    $tamanioPagina = 8;
-    $numFilas = Tareas::getNumeroTareasFiltrado($consulta);
-    $empezarDesde = 0;
+        $tamanioPagina = 8;
+        $numFilas = Tareas::getNumeroTareasFiltrado($consulta);
+        $empezarDesde = 0;
 
-    echo $blade->render('listaFiltradoTarea', [ //renderizamos el lista filtrado Tarea
-        'tareas' => Tareas::getTareasPorPaginaFiltrado($consulta, $empezarDesde, $numFilas),
-        'nombreCampos' => $nombreCampos,
-    ]);
+        echo $blade->render('listaFiltradoTarea', [ //renderizamos el lista filtrado Tarea
+            'tareas' => Tareas::getTareasPorPaginaFiltrado($consulta, $empezarDesde, $numFilas),
+            'nombreCampos' => $nombreCampos,
+        ]);
+    }
 }
 
 //}

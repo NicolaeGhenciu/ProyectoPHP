@@ -9,55 +9,59 @@ include(__DIR__ . '/../libreria/creaTable.php');
 
 session_start();
 
-$nombreCampos = [ //nombre de los campos a mostrar
-    'id', 'nif_cif', 'nombre', 'descripcion', 'poblacion',
-    'estado', 'fecha_creacion', 'operario_encargado', 'fecha_realizacion',
-];
+if ($_SESSION['rol'] == "Administrador" && $_SESSION['rol'] == "Operario") {
 
-$tamanioPagina = 5; //tamaño de la pagina
+    $nombreCampos = [ //nombre de los campos a mostrar
+        'id', 'nif_cif', 'nombre', 'descripcion', 'poblacion',
+        'estado', 'fecha_creacion', 'operario_encargado', 'fecha_realizacion',
+    ];
 
-
-//Comprobamos si nos han enviado el parametro pagina
-
-
-if (isset($_GET['pagina'])) {
-
-    if ($_GET['pagina'] == 1) {
-
-        header('location:procesarListaTareas.php');
-    } else {
-        $pagina = $_GET['pagina'];
-    }
-} else {
-    $pagina = 1;
-}
+    $tamanioPagina = 5; //tamaño de la pagina
 
 
-$numFilas = Tareas::getNumeroTareas(); //numero de filas
-
-$totalPaginas = ceil($numFilas / $tamanioPagina); //total de paginas que vamos a tener
+    //Comprobamos si nos han enviado el parametro pagina
 
 
-//Comprobamos si por el buscador nos han enviado la variable numpag
+    if (isset($_GET['pagina'])) {
 
-if (isset($_GET['numPag'])) {
+        if ($_GET['pagina'] == 1) {
 
-    if ($_GET['numPag'] > 0 && $_GET['numPag'] <= $totalPaginas) {
-        $pagina = $_GET['numPag'];
+            header('location:procesarListaTareas.php');
+        } else {
+            $pagina = $_GET['pagina'];
+        }
     } else {
         $pagina = 1;
     }
+
+
+    $numFilas = Tareas::getNumeroTareas(); //numero de filas
+
+    $totalPaginas = ceil($numFilas / $tamanioPagina); //total de paginas que vamos a tener
+
+
+    //Comprobamos si por el buscador nos han enviado la variable numpag
+
+    if (isset($_GET['numPag'])) {
+
+        if ($_GET['numPag'] > 0 && $_GET['numPag'] <= $totalPaginas) {
+            $pagina = $_GET['numPag'];
+        } else {
+            $pagina = 1;
+        }
+    }
+
+    $empezarDesde = ($pagina - 1) * $tamanioPagina; //desde donde vamos a empezar ej: multiplicamos 0 x 0 por lo tanto empezamos en 0
+
+
+    echo $blade->render('listaTareas', [ //renderizamos la lista de Tareas
+        'tareas' => Tareas::getTareasPorPagina($empezarDesde, $tamanioPagina),
+        'nombreCampos' => $nombreCampos,
+        'empezarDesde' => $empezarDesde,
+        'tamanioPagina' => $tamanioPagina,
+        'pagina' => $pagina,
+        'totalPaginas' => $totalPaginas
+
+    ]);
+
 }
-
-$empezarDesde = ($pagina - 1) * $tamanioPagina; //desde donde vamos a empezar ej: multiplicamos 0 x 0 por lo tanto empezamos en 0
-
-
-echo $blade->render('listaTareas', [ //renderizamos la lista de Tareas
-    'tareas' => Tareas::getTareasPorPagina($empezarDesde, $tamanioPagina),
-    'nombreCampos' => $nombreCampos,
-    'empezarDesde' => $empezarDesde,
-    'tamanioPagina' => $tamanioPagina,
-    'pagina' => $pagina,
-    'totalPaginas' => $totalPaginas
-
-]);

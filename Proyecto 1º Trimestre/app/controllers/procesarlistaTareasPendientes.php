@@ -9,6 +9,8 @@ include(__DIR__ . '/../libreria/creaTable.php');
 
 session_start();
 
+if ($_SESSION['rol'] == "Administrador" && $_SESSION['rol'] == "Operario") {
+
 $nombreCampos = [ //nombre de los campos a mostrar
     'id', 'nif_cif', 'nombre', 'descripcion', 'poblacion',
     'estado', 'fecha_creacion', 'operario_encargado', 'fecha_realizacion',
@@ -57,3 +59,5 @@ echo $blade->render('listaTareasPendientes', [ //renderizamos la lista de Tareas
     'totalPaginas' => $totalPaginas
 
 ]);
+
+}
