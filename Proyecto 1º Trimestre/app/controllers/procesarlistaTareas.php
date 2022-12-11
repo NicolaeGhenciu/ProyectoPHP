@@ -9,7 +9,7 @@ include(__DIR__ . '/../libreria/creaTable.php');
 
 session_start();
 
-if ($_SESSION['rol'] == "Administrador" && $_SESSION['rol'] == "Operario") {
+if ($_SESSION['rol'] == "Administrador" || $_SESSION['rol'] == "Operario") {
 
     $nombreCampos = [ //nombre de los campos a mostrar
         'id', 'nif_cif', 'nombre', 'descripcion', 'poblacion',

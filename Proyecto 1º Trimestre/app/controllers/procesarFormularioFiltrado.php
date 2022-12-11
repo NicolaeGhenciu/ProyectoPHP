@@ -10,7 +10,7 @@ include(__DIR__ . "/../libreria/creaTable.php");
 
 session_start();
 
-if ($_SESSION['rol'] == "Administrador" && $_SESSION['rol'] == "Operario") {
+if ($_SESSION['rol'] == "Administrador" || $_SESSION['rol'] == "Operario") {
 
     //if (!isset($_GET['pagina'])) {
 

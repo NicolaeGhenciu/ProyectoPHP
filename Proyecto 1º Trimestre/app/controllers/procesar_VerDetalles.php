@@ -10,7 +10,7 @@ include(__DIR__ . "/../libreria/getContenido.php");
 
 session_start();
 
-if ($_SESSION['rol'] == "Administrador" && $_SESSION['rol'] == "Operario") {
+if ($_SESSION['rol'] == "Administrador" || $_SESSION['rol'] == "Operario") {
 
     $id = $_GET["id"]; //recogemos la id
 
