@@ -1,17 +1,19 @@
 <?php
+
+include(__DIR__ . "/../controllers/varios.php");
+
+include(__DIR__ . "/../models/Tareas.php");
+include(__DIR__ . "/../models/conx_bd.php");
+
+include(__DIR__ . "/../libreria/creaTable.php");
+include(__DIR__ . "/../libreria/getContenido.php");
+
 session_start();
-include("../models/Tareas.php");
-include("../models/conx_bd.php");
-include("../libreria/creaTable.php");
-include("../libreria/getContenido.php");
-include("../controllers/varios.php");
 
-$id = $_GET["id"];
+$id = $_GET["id"]; //recogemos la id
 
-$datosTarea = Tareas::getdatosTarea($id);
+$datosTarea = Tareas::getdatosTarea($id); // con la id cogemos todos los datos de la tarea
 
-echo $blade->render('verDetalles',[
+echo $blade->render('verDetalles', [ //renderizamos y enviamos todos los datos de la tarea a la vista
     'datosTarea' => $datosTarea,
 ]);
-
-

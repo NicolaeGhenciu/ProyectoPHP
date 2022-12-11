@@ -3,9 +3,9 @@
 /**
  * getContenido
  *
- * @param  mixed $todos_los_campos
- * @param  mixed $valor
- * @return void
+ * @param  array $todos_los_campos es un array indexado que trae en el index el nombre del campo y en el contenido el valor
+ * @param  string $valor booleano que dependiendo de su valor retornara un array o un string
+ * @return array o string dependiendo del boolean
  */
 
 function getContenido($todos_los_campos, $valor)

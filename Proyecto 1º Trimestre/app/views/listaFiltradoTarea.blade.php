@@ -11,6 +11,8 @@
 
     <?= creaTable('tareasfiltrado', $nombreCampos, $tareas, "id") ?>
 
+    <!--
+
     <a href="?pagina=1" class="btn btn-dark" role='button'>Primera</a>
 
     <a href="?pagina=<?= ($pagina == 1) ? $pagina : $pagina - 1 ?>" class="btn btn-dark" role='button'>Anterior</a>
@@ -34,6 +36,8 @@
             </div>
         </form>
     </div>
+    -->
+    
     @endsection
 </body>
 

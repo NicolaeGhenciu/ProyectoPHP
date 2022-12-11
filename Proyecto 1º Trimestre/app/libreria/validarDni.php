@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * validarDni
+ *
+ * @param  mixed $dni contiene el dni a comprobar
+ * @return boolean
+ */
+
 function validarDni($dni)
 {
     $dnisL = substr($dni, 0, -1);

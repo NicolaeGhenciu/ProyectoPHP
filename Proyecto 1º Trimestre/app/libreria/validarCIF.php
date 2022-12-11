@@ -3,9 +3,10 @@
 /**
  * validarCIF
  *
- * @param  mixed $cif
- * @return void
+ * @param  string $cif contiene el cif y la funcion comprueba si es valido
+ * @return boolean
  */
+
 function validarCIF($cif)
 {
 

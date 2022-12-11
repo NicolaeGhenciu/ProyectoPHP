@@ -13,7 +13,7 @@
 
 <body>
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-0 border-bottom">
-        <h1 class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">Bunglebuild S.L.&nbsp;&nbsp;&nbsp;<img src="/Assets/img/logo.jpg"></h1>
+        <h1 class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">Bunglebuild S.L.&nbsp;&nbsp;<img id="logo" src="/Assets/img/logo.jpg"></h1>
 
         <div>
             <b><?= $_SESSION['nombre'], " - ", $_SESSION['rol'], ' ', ($_SESSION['rol'] == 'Operario' ? '<i class="fa-sharp fa-solid fa-gavel"></i>' : '<i class="fa-solid fa-chess-king"></i>'), " - ", $_SESSION['fecha'] ?></b> <a href="/app/controllers/validar_login.php" class="btn btn-warning"><i class="fa-sharp fa-solid fa-right-from-bracket"></i> LOGOUT</a>

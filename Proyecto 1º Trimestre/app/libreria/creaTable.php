@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * creaTable
+ *
+ * @param  string $name Nombre del campo tabla
+ * @param  array $nombreCampos array con el nombre de todos los campos que iran al th
+ * @param  array $listaValores array  con los valores que contendra la tabla tr,td
+ * @param  string $pk es la primary key
+ * @return string retorna una tabla
+ */
+
+
 function creaTable($name, $nombreCampos, $listaValores, $pk)
 {
 

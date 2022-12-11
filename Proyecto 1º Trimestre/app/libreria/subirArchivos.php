@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * subirArchivo
+ *
+ * @param  string $fich nombre del fichero
+ * @param  string $id id de la tarea al que va a pertenecer el array
+ * @return void
+ */
+
 function subirArchivo($fich, $id)
 {
     $destino = __DIR__ . "/../../Files/";

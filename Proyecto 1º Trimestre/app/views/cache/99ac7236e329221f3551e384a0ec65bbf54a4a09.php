@@ -10,7 +10,11 @@
     
 
     <?php $__env->startSection('cuerpo'); ?>
+    <br>
+    <br>
 
+    <h1 style="color: #00BFFF;">Bienvenido <?= $_SESSION['nombre'] ?></h1>
+    <img src="/Assets/img/grua.jpg">
     <?php $__env->stopSection(); ?>
 </body>
 

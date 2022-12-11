@@ -1,7 +1,5 @@
 <?php
 
-use function PHPSTORM_META\type;
-
 class conx_basedatos
 {
     public $_pdo;
@@ -39,6 +37,16 @@ class conx_basedatos
     }
 
 
+    /**
+     * getListaSelect
+     *
+     * @param  string $tabla tabla donde vamos a realizar la consulta
+     * @param  string $c_idx parametros que le vamos a pedir a la consulta
+     * @param  string $c_value parametros que le vamos a pedir a la consulta
+     * @param  string $condicion
+     * @return array 
+     */
+
     function getListaSelect($tabla, $c_idx, $c_value, $condicion = "")
     {
         $this->stmt = $this->pdo->prepare('SELECT ' . $c_idx . ',' . $c_value . ' FROM ' . $tabla . " " . $condicion);
@@ -50,6 +58,15 @@ class conx_basedatos
         }
         return $lista;
     }
+
+    /**
+     * insertarCampos
+     *
+     * @param  string $tabla tabla donde vamos a hacer el insert
+     * @param  string $listaValues string con el nombre de los campos de la bbdd
+     * @param  array $campos array con los valores que iran en el value de la consulta
+     * @return void
+     */
 
     function insertarCampos($tabla, $listaValues, $campos)
     {
@@ -69,10 +86,18 @@ class conx_basedatos
         $resultado->execute(array());
     }
 
-    public function numFilas($tabla)
+    /**
+     * numFilas
+     *
+     * @param  string $tabla tabla de la que queramos saber el numero de filas que tiene
+     * @param  string $condicion Consulta Where en caso de tenerla, sino sera ""
+     * @return void
+     */
+
+    public function numFilas($tabla, $condicion = "")
     {
 
-        $sql = "SELECT * FROM " . $tabla;
+        $sql = "SELECT * FROM " . $tabla . $condicion;
 
         $resultado = $this->pdo->prepare($sql);
         $resultado->execute();
@@ -82,39 +107,21 @@ class conx_basedatos
         return $numFilas;
     }
 
-    public function numFilasPendientes($tabla)
-    {
+    /**
+     * resultadosPorPagina
+     *
+     * @param  string $condicion where en caso de que existir
+     * @param  int $empezarDesde numero de la pagina por donde empezar  a paginar
+     * @param  int $tamanioPagina numero de la pagina donde termina el paginado
+     * @return void
+     */
 
-        $sql = "SELECT * FROM " . $tabla . " WHERE estado='P'";
-
-        $resultado = $this->pdo->prepare($sql);
-        $resultado->execute();
-
-        $numFilas = $resultado->rowCount();
-
-        return $numFilas;
-    }
-
-    public function numFilasFiltrado($condicion)
-    {
-
-        $sql = "SELECT * FROM tareas " . $condicion;
-        echo $sql;
-
-        $resultado = $this->pdo->prepare($sql);
-        $resultado->execute();
-
-        $numFilas = $resultado->rowCount();
-
-        return $numFilas;
-    }
-
-    public function resultadosPorPagina($tareas, $empezarDesde, $tamanioPagina)
+    public function resultadosPorPagina($condicion = "", $empezarDesde, $tamanioPagina)
     {
 
         $queryLimite = "SELECT id,nif_cif,nombre,apellidos,telefono,descripcion,email,direccion,poblacion,
         codigo_postal,provincias,estado,DATE_FORMAT(fecha_creacion, '%d/%m/%Y') AS fecha_creacion ,operario_encargado, DATE_FORMAT(fecha_realizacion, '%d/%m/%Y') AS fecha_realizacion,
-        anotaciones_anteriores,anotaciones_posteriores,fichero_resumen,foto_trabajo FROM `tareas` ORDER BY fecha_realizacion " .  " LIMIT " . $empezarDesde . "," . $tamanioPagina;
+        anotaciones_anteriores,anotaciones_posteriores,fichero_resumen,foto_trabajo FROM `tareas` " . $condicion . " ORDER BY fecha_realizacion " .  " LIMIT " . $empezarDesde . "," . $tamanioPagina;
 
         $resultado = $this->pdo->prepare($queryLimite);
         $resultado->execute();
@@ -139,21 +146,13 @@ class conx_basedatos
         return $datos;
     }
 
-    public function resultadosPorPaginaPendietes($tareas, $empezarDesde, $tamanioPagina)
-    {
-
-        $queryLimite = "SELECT id,nif_cif,nombre,apellidos,telefono,descripcion,email,direccion,poblacion,
-        codigo_postal,provincias,estado,DATE_FORMAT(fecha_creacion, '%d/%m/%Y') AS fecha_creacion ,operario_encargado, DATE_FORMAT(fecha_realizacion, '%d/%m/%Y') AS fecha_realizacion,
-        anotaciones_anteriores,anotaciones_posteriores,fichero_resumen,foto_trabajo FROM `tareas` WHERE estado='P'  ORDER BY fecha_realizacion " .  " LIMIT " . $empezarDesde . "," . $tamanioPagina;
-
-        $resultado = $this->pdo->prepare($queryLimite);
-        $resultado->execute();
-
-        //Almacenamos el resultado de fetchAll en una variable/
-        $datos = $resultado->fetchAll(PDO::FETCH_ASSOC);
-
-        return $datos;
-    }
+    /**
+     * getNifLogin
+     *
+     * @param  string $correo correo que le vamos a pasar por parametro
+     * @param  string $clave que le vamos a pasar por parametro para comprobar que el usuario existe
+     * @return void
+     */
 
     function getNifLogin($correo, $clave)
     {
@@ -161,13 +160,28 @@ class conx_basedatos
         return $stmt->fetch();
     }
 
+    /**
+     * getCountTareas
+     * retorna el numero de tareas existentes
+     * @return string 
+     */
+
     function getCountTareas()
     {
         $stmt = $this->pdo->query("SELECT id FROM tareas GROUP BY id desc limit 1");
         return $stmt->fetch();
     }
 
-    function borrarFila($tabla,$nombreCampo,$idt)
+    /**
+     * borrarFila
+     *
+     * @param  string $tabla nombre de la tabla
+     * @param  string $nombreCampo nombre del campo a comprobar en la consulta Where
+     * @param  string $idt value que va va en el where
+     * @return void
+     */
+
+    function borrarFila($tabla, $nombreCampo, $idt)
     {
 
         $sql = "DELETE FROM $tabla WHERE $nombreCampo = $idt";
@@ -178,13 +192,33 @@ class conx_basedatos
         $resultado->execute();
     }
 
-    function getFila($tabla,$nombreCampo,$idt)
+    /**
+     * getFila
+     * 
+     * @param  string $tabla nombre de la tabla
+     * @param  string $nombreCampo nombre del campo a comprobar en la consulta
+     * @param  string $idt value que va en el where
+     * @return array nos retorna en un array indexado todos los datos de la fila
+     */
+
+    function getFila($tabla, $nombreCampo, $idt)
     {
         $stmt = $this->pdo->query("SELECT * FROM $tabla WHERE $nombreCampo = $idt");
         return $stmt->fetch();
     }
 
-    function update($tabla,$pk,$nombres, $campos, $idt)
+    /**
+     * update
+     * actualizar una fila de la bbdd
+     * @param  string $tabla nombre de la tabla
+     * @param  string $pk primay key que usaremos en la consulta where
+     * @param  array $nombres array con los nombres de los campos
+     * @param  mixed $campos array con los values
+     * @param  mixed $idt el value a comparar con la pk
+     * @return void
+     */
+
+    function update($tabla, $pk, $nombres, $campos, $idt)
     {
 
         $cadena = '';
@@ -204,21 +238,5 @@ class conx_basedatos
 
         $resultado = $this->pdo->prepare($sql);
         $resultado->execute(array());
-    }
-
-    function buscarTarea($consulta)
-    {
-
-        $queryLimite = "SELECT id,nif_cif,nombre,apellidos,telefono,descripcion,email,direccion,poblacion,
-        codigo_postal,provincias,estado,DATE_FORMAT(fecha_creacion, '%d/%m/%Y') AS fecha_creacion ,operario_encargado, DATE_FORMAT(fecha_realizacion, '%d/%m/%Y') AS fecha_realizacion,
-        anotaciones_anteriores,anotaciones_posteriores,fichero_resumen,foto_trabajo FROM `tareas` " . $consulta;
-
-        $resultado = $this->pdo->prepare($queryLimite);
-        $resultado->execute();
-
-        //Almacenamos el resultado de fetchAll en una variable/
-        $datos = $resultado->fetchAll(PDO::FETCH_ASSOC);
-
-        return $datos;
     }
 }
